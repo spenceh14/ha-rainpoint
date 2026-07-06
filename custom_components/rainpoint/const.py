@@ -1,11 +1,11 @@
 # Display Hub model constant
-DOMAIN = "rainpoint_spenceh14"
+DOMAIN = "rainpoint"
 
 # Integration version
 VERSION = "1.5.3"  # x-release-please-version
 
 # Issue tracker URL
-ISSUE_URL = "https://github.com/spenceh14/ha-rainpoint/issues"
+ISSUE_URL = "https://github.com/funkadelic/ha-rainpoint/issues"
 
 
 # Helper function for debug messages with version

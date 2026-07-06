@@ -1,4 +1,4 @@
-"""Tests for custom_components.rainpoint_spenceh14.config_flow.
+"""Tests for custom_components.rainpoint.config_flow.
 
 The real `homeassistant.config_entries.ConfigFlow` stand-in and
 `aiohttp.ClientError` stand-in are installed by `tests/conftest.py` before
@@ -10,9 +10,9 @@ from unittest.mock import AsyncMock, MagicMock, patch
 
 import pytest
 
-from custom_components.rainpoint_spenceh14.api import RainPointApiError
-from custom_components.rainpoint_spenceh14.config_flow import RainPointConfigFlow
-from custom_components.rainpoint_spenceh14.const import (
+from custom_components.rainpoint.api import RainPointApiError
+from custom_components.rainpoint.config_flow import RainPointConfigFlow
+from custom_components.rainpoint.const import (
     CONF_AREA_CODE,
     CONF_COUNTRY,
     CONF_EMAIL,
@@ -85,11 +85,11 @@ class TestConfigFlowUserStep:
 
         with (
             patch(
-                "custom_components.rainpoint_spenceh14.config_flow.async_get_clientsession",
+                "custom_components.rainpoint.config_flow.async_get_clientsession",
                 return_value=MagicMock(),
             ),
             patch(
-                "custom_components.rainpoint_spenceh14.config_flow.RainPointClient",
+                "custom_components.rainpoint.config_flow.RainPointClient",
                 return_value=mock_client,
             ),
         ):
@@ -110,11 +110,11 @@ class TestConfigFlowUserStep:
 
         with (
             patch(
-                "custom_components.rainpoint_spenceh14.config_flow.async_get_clientsession",
+                "custom_components.rainpoint.config_flow.async_get_clientsession",
                 return_value=MagicMock(),
             ),
             patch(
-                "custom_components.rainpoint_spenceh14.config_flow.RainPointClient",
+                "custom_components.rainpoint.config_flow.RainPointClient",
                 return_value=mock_client,
             ),
         ):
@@ -133,11 +133,11 @@ class TestConfigFlowUserStep:
 
         with (
             patch(
-                "custom_components.rainpoint_spenceh14.config_flow.async_get_clientsession",
+                "custom_components.rainpoint.config_flow.async_get_clientsession",
                 return_value=MagicMock(),
             ),
             patch(
-                "custom_components.rainpoint_spenceh14.config_flow.RainPointClient",
+                "custom_components.rainpoint.config_flow.RainPointClient",
                 return_value=mock_client,
             ),
         ):
@@ -155,11 +155,11 @@ class TestConfigFlowUserStep:
 
         with (
             patch(
-                "custom_components.rainpoint_spenceh14.config_flow.async_get_clientsession",
+                "custom_components.rainpoint.config_flow.async_get_clientsession",
                 return_value=MagicMock(),
             ),
             patch(
-                "custom_components.rainpoint_spenceh14.config_flow.RainPointClient",
+                "custom_components.rainpoint.config_flow.RainPointClient",
                 return_value=mock_client,
             ),
         ):
@@ -281,11 +281,11 @@ class TestConfigFlowReconfigure:
 
         with (
             patch(
-                "custom_components.rainpoint_spenceh14.config_flow.async_get_clientsession",
+                "custom_components.rainpoint.config_flow.async_get_clientsession",
                 return_value=MagicMock(),
             ),
             patch(
-                "custom_components.rainpoint_spenceh14.config_flow.RainPointClient",
+                "custom_components.rainpoint.config_flow.RainPointClient",
                 return_value=mock_client,
             ),
         ):
@@ -297,7 +297,7 @@ class TestConfigFlowReconfigure:
         # Email must be normalised (lowercased + stripped)
         assert flow._email == "new@example.com"
         # Unique ID must be set (and awaited) using the normalised email
-        flow.async_set_unique_id.assert_awaited_once_with("rainpoint_spenceh14_new@example.com")
+        flow.async_set_unique_id.assert_awaited_once_with("rainpoint_new@example.com")
 
     @pytest.mark.asyncio
     async def test_reconfigure_auth_error(self):
@@ -308,11 +308,11 @@ class TestConfigFlowReconfigure:
 
         with (
             patch(
-                "custom_components.rainpoint_spenceh14.config_flow.async_get_clientsession",
+                "custom_components.rainpoint.config_flow.async_get_clientsession",
                 return_value=MagicMock(),
             ),
             patch(
-                "custom_components.rainpoint_spenceh14.config_flow.RainPointClient",
+                "custom_components.rainpoint.config_flow.RainPointClient",
                 return_value=mock_client,
             ),
         ):
@@ -331,11 +331,11 @@ class TestConfigFlowReconfigure:
 
         with (
             patch(
-                "custom_components.rainpoint_spenceh14.config_flow.async_get_clientsession",
+                "custom_components.rainpoint.config_flow.async_get_clientsession",
                 return_value=MagicMock(),
             ),
             patch(
-                "custom_components.rainpoint_spenceh14.config_flow.RainPointClient",
+                "custom_components.rainpoint.config_flow.RainPointClient",
                 return_value=mock_client,
             ),
         ):
@@ -383,11 +383,11 @@ class TestConfigFlowReconfigure:
 
         with (
             patch(
-                "custom_components.rainpoint_spenceh14.config_flow.async_get_clientsession",
+                "custom_components.rainpoint.config_flow.async_get_clientsession",
                 return_value=MagicMock(),
             ),
             patch(
-                "custom_components.rainpoint_spenceh14.config_flow.RainPointClient",
+                "custom_components.rainpoint.config_flow.RainPointClient",
                 return_value=mock_client,
             ),
         ):

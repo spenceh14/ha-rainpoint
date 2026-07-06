@@ -6,8 +6,8 @@ from unittest.mock import AsyncMock, MagicMock
 
 import pytest
 
-from custom_components.rainpoint_spenceh14.const import DOMAIN, MODEL_VALVE_245, MODEL_VALVE_345
-from custom_components.rainpoint_spenceh14.valve import (
+from custom_components.rainpoint.const import DOMAIN, MODEL_VALVE_245, MODEL_VALVE_345
+from custom_components.rainpoint.valve import (
     DEFAULT_DURATION_SECONDS,
     RainPointValveEntity,
 )
@@ -337,7 +337,7 @@ class TestValveInit:
 
     def test_init_builds_unique_id_and_name(self):
         """__init__ populates unique_id and name using hid/mid/addr/sub_name/zone."""
-        from custom_components.rainpoint_spenceh14.valve import RainPointValveEntity
+        from custom_components.rainpoint.valve import RainPointValveEntity
 
         mock_coordinator = MagicMock()
         mock_coordinator.data = {"sensors": {}}
@@ -358,7 +358,7 @@ class TestValveInit:
 
     def test_init_defaults_sub_name_when_missing(self):
         """Missing sub_name falls back to 'Valve Hub {addr}'."""
-        from custom_components.rainpoint_spenceh14.valve import RainPointValveEntity
+        from custom_components.rainpoint.valve import RainPointValveEntity
 
         mock_coordinator = MagicMock()
         mock_coordinator.data = {"sensors": {}}
@@ -375,7 +375,7 @@ class TestValveSetupEntry:
     @pytest.mark.asyncio
     async def test_setup_entry_creates_one_entity_per_zone(self):
         """One valve entity per zone reported in the decoded payload."""
-        from custom_components.rainpoint_spenceh14.valve import async_setup_entry
+        from custom_components.rainpoint.valve import async_setup_entry
 
         sensors = {
             "10_20_1": {
@@ -414,7 +414,7 @@ class TestValveSetupEntry:
     @pytest.mark.asyncio
     async def test_setup_entry_creates_entities_for_valve_345(self):
         """HTV345FRF creates one valve entity per reported zone."""
-        from custom_components.rainpoint_spenceh14.valve import async_setup_entry
+        from custom_components.rainpoint.valve import async_setup_entry
 
         sensors = {
             "10_20_1": {
@@ -452,7 +452,7 @@ class TestValveSetupEntry:
     @pytest.mark.asyncio
     async def test_setup_entry_skips_non_valve_models(self):
         """Non-valve models are skipped; no entities created."""
-        from custom_components.rainpoint_spenceh14.valve import async_setup_entry
+        from custom_components.rainpoint.valve import async_setup_entry
 
         sensors = {
             "10_20_1": {
@@ -479,7 +479,7 @@ class TestValveSetupEntry:
     @pytest.mark.asyncio
     async def test_setup_entry_skips_when_no_zones(self):
         """Valve model with empty zones dict produces no entities."""
-        from custom_components.rainpoint_spenceh14.valve import async_setup_entry
+        from custom_components.rainpoint.valve import async_setup_entry
 
         sensors = {
             "10_20_1": {
@@ -506,7 +506,7 @@ class TestValveSetupEntry:
     @pytest.mark.asyncio
     async def test_setup_entry_handles_missing_data(self):
         """Sensor entry with no 'data' key yields empty zones -> no entities."""
-        from custom_components.rainpoint_spenceh14.valve import async_setup_entry
+        from custom_components.rainpoint.valve import async_setup_entry
 
         sensors = {
             "10_20_1": {
@@ -582,7 +582,7 @@ class TestApplyResponseStateBranches:
 
     def test_apply_response_state_uses_valve_hub_decoder_for_non_213_245(self, monkeypatch):
         """Model not in (213, 245) routes through decode_valve_hub and short-circuits on falsy decode."""
-        from custom_components.rainpoint_spenceh14 import valve as valve_mod
+        from custom_components.rainpoint import valve as valve_mod
 
         valve = _make_valve(model=MODEL_VALVE_245)
         valve._sensor_info["model"] = "HWV100FRF"  # unknown valve-hub variant
@@ -598,7 +598,7 @@ class TestApplyResponseStateBranches:
 
     def test_apply_response_state_uses_htv_decoder_for_valve_345(self, monkeypatch):
         """HTV345FRF routes control responses through the shared HTV213/245 decoder."""
-        from custom_components.rainpoint_spenceh14 import valve as valve_mod
+        from custom_components.rainpoint import valve as valve_mod
 
         valve = _make_valve(model=MODEL_VALVE_345)
         valve.coordinator.async_set_updated_data = MagicMock()
@@ -628,7 +628,7 @@ class TestApplyResponseStateBranches:
 
     def test_apply_response_state_decoder_returns_empty(self, monkeypatch):
         """decode_valve_hub returning falsy short-circuits before async_set_updated_data."""
-        from custom_components.rainpoint_spenceh14 import valve as valve_mod
+        from custom_components.rainpoint import valve as valve_mod
 
         valve = _make_valve(model=MODEL_VALVE_245)
         valve._sensor_info["model"] = "HWV100FRF"  # not in (VALVE_213, VALVE_245)

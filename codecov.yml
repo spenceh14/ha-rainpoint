@@ -9,5 +9,5 @@ coverage:
         target: auto
 
 ignore:
-  - "custom_components/rainpoint_spenceh14/debug.py"
+  - "custom_components/rainpoint/debug.py"
   - "tests/"

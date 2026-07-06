@@ -1,6 +1,6 @@
 """Tests for RainPoint device decoders."""
 
-from custom_components.rainpoint_spenceh14.api import (
+from custom_components.rainpoint.api import (
     decode_co2,
     decode_display,
     decode_flow_meter,
@@ -191,7 +191,7 @@ class TestLittleEndianTripwire:
         will decode as int.from_bytes(b'\\xe8\\x03', 'big') = 59395 instead
         of the correct int.from_bytes(b'\\xe8\\x03', 'little') = 1000.
         """
-        from custom_components.rainpoint_spenceh14.api.utils import _parse_tlv_payload
+        from custom_components.rainpoint.api.utils import _parse_tlv_payload
 
         # Construct a minimal TLV payload with one 0xAD-typed record:
         # DP ID 0x25 (zone 1 duration), type 0xAD, value bytes E8 03
@@ -299,7 +299,7 @@ class TestHtv213DpMapEdgeCases:
            appending any 3+ trailing bytes would satisfy 0xAD's value length
            and short-circuit the truncated branch.
         """
-        from custom_components.rainpoint_spenceh14.api.decoders import _scan_htv213_dp_map
+        from custom_components.rainpoint.api.decoders import _scan_htv213_dp_map
 
         bare_truncated = bytes([0x10, 0xAD, 0x01])
         assert _scan_htv213_dp_map(bare_truncated) == {}, "Bare truncation should yield empty dp_map"
@@ -311,7 +311,7 @@ class TestHtv213DpMapEdgeCases:
 
     def test_unknown_type_byte_is_skipped(self):
         """An unrecognized type byte advances 1 byte and produces no dp entry."""
-        from custom_components.rainpoint_spenceh14.api.decoders import _scan_htv213_dp_map
+        from custom_components.rainpoint.api.decoders import _scan_htv213_dp_map
 
         # DP 0x10, type 0x00 (not in _HTV213_TYPE_LENGTHS), one trailing byte
         unknown = bytes([0x10, 0x00, 0x01])
@@ -731,7 +731,7 @@ class TestValveHubErrorPath:
 
     def test_extract_valve_hub_state_no_dp_returns_false(self):
         """An empty TLV map yields hub_online=False without raising."""
-        from custom_components.rainpoint_spenceh14.api.decoders import _extract_valve_hub_state
+        from custom_components.rainpoint.api.decoders import _extract_valve_hub_state
 
         assert _extract_valve_hub_state({}) is False
 
@@ -741,7 +741,7 @@ class TestHws019PartialBranches:
 
     def test_keyed_item_without_parens_takes_full_value(self):
         """A 'K=plain_value' item with no '(' stores the value as-is."""
-        from custom_components.rainpoint_spenceh14.api.decoders import _apply_hws019_keyed_item
+        from custom_components.rainpoint.api.decoders import _apply_hws019_keyed_item
 
         readings: dict = {}
         _apply_hws019_keyed_item("K=plain_value", readings)
@@ -749,14 +749,14 @@ class TestHws019PartialBranches:
 
     def test_third_positional_item_after_humidity_is_ignored(self):
         """A third positional item is silently dropped once temp + humidity are filled."""
-        from custom_components.rainpoint_spenceh14.api.decoders import _parse_hws019_readings
+        from custom_components.rainpoint.api.decoders import _parse_hws019_readings
 
         result = _parse_hws019_readings("707(707/694/1),42(42/39/1),99(99/0/1)")
         assert result == {"temp": "707", "humidity": "42"}
 
     def test_readings_token_without_equals_or_parens_is_ignored(self):
         """A readings token with neither '=' nor '(' is silently dropped."""
-        from custom_components.rainpoint_spenceh14.api.decoders import _parse_hws019_readings
+        from custom_components.rainpoint.api.decoders import _parse_hws019_readings
 
         result = _parse_hws019_readings("plain_text_no_special_chars")
         assert result == {}

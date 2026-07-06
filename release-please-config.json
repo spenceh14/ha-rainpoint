@@ -6,12 +6,12 @@
       "extra-files": [
         {
           "type": "json",
-          "path": "custom_components/rainpoint_spenceh14/manifest.json",
+          "path": "custom_components/rainpoint/manifest.json",
           "jsonpath": "$.version"
         },
         {
           "type": "generic",
-          "path": "custom_components/rainpoint_spenceh14/const.py"
+          "path": "custom_components/rainpoint/const.py"
         },
         {
           "type": "generic",

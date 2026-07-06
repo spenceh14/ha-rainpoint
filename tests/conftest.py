@@ -1,7 +1,7 @@
 """Test configuration for rainpoint integration tests.
 
 This conftest stubs out Home Assistant and third-party HA dependencies so that
-custom_components.rainpoint_spenceh14.api can be imported in plain pytest without a running
+custom_components.rainpoint.api can be imported in plain pytest without a running
 Home Assistant instance.
 """
 
@@ -49,7 +49,7 @@ def _make_update_coordinator_stub() -> ModuleType:
 
 
 # All HA / third-party modules pulled in transitively when
-# custom_components.rainpoint_spenceh14 (the package __init__) loads.
+# custom_components.rainpoint (the package __init__) loads.
 # Must be registered BEFORE any test module is imported so that the package
 # __init__.py sees them on sys.modules instead of trying a real import.
 _HA_STUBS = [

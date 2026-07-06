@@ -6,8 +6,8 @@ from unittest.mock import MagicMock
 
 import pytest
 
-from custom_components.rainpoint_spenceh14.const import DOMAIN
-from custom_components.rainpoint_spenceh14.switch import async_setup_entry
+from custom_components.rainpoint.const import DOMAIN
+from custom_components.rainpoint.switch import async_setup_entry
 
 
 def _make_hass(hubs=None):
@@ -72,7 +72,7 @@ class TestSwitchSetupEntry:
         # Force the precondition explicitly rather than relying on const.py
         # to stay empty, so this test does not give a misleading hub-count
         # failure if anyone sets a real debug worker URL.
-        monkeypatch.setattr("custom_components.rainpoint_spenceh14.switch.DEBUG_WORKER_URL", "")
+        monkeypatch.setattr("custom_components.rainpoint.switch.DEBUG_WORKER_URL", "")
 
         hub_info = {"hid": 100, "name": "Hub 1", "softVer": "1.0"}
         hass, entry, _coord = _make_hass(hubs=[hub_info])
@@ -89,12 +89,12 @@ class TestSwitchSetupEntry:
         """A truthy DEBUG_WORKER_URL appends a RainPointDebugSwitchEntity alongside hubs."""
         # Patch the module-level name seen by switch.py, not the const module.
         monkeypatch.setattr(
-            "custom_components.rainpoint_spenceh14.switch.DEBUG_WORKER_URL",
+            "custom_components.rainpoint.switch.DEBUG_WORKER_URL",
             "https://example.com",
         )
         # Stub the debug entity constructor so we do not exercise its real body.
         monkeypatch.setattr(
-            "custom_components.rainpoint_spenceh14.debug.RainPointDebugSwitchEntity",
+            "custom_components.rainpoint.debug.RainPointDebugSwitchEntity",
             MagicMock(),
         )
 
