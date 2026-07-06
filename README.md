@@ -1,9 +1,9 @@
-# RainPoint Cloud
+# RainPoint Spenceh14
 
-[![Build](https://github.com/funkadelic/ha-rainpoint/actions/workflows/tests.yml/badge.svg)](https://github.com/funkadelic/ha-rainpoint/actions/workflows/tests.yml)
-[![Codecov](https://img.shields.io/codecov/c/github/funkadelic/ha-rainpoint?logo=codecov)](https://codecov.io/gh/funkadelic/ha-rainpoint)
-[![Release](https://img.shields.io/github/release/funkadelic/ha-rainpoint.svg)](https://github.com/funkadelic/ha-rainpoint/releases)
-[![License](https://img.shields.io/github/license/funkadelic/ha-rainpoint.svg)](LICENSE)
+[![Build](https://github.com/spenceh14/ha-rainpoint/actions/workflows/tests.yml/badge.svg)](https://github.com/spenceh14/ha-rainpoint/actions/workflows/tests.yml)
+[![Codecov](https://img.shields.io/codecov/c/github/spenceh14/ha-rainpoint?logo=codecov)](https://codecov.io/gh/spenceh14/ha-rainpoint)
+[![Release](https://img.shields.io/github/release/spenceh14/ha-rainpoint.svg)](https://github.com/spenceh14/ha-rainpoint/releases)
+[![License](https://img.shields.io/github/license/spenceh14/ha-rainpoint.svg)](LICENSE)
 [![HACS](https://img.shields.io/badge/HACS-Default-blue.svg)](https://github.com/hacs/default)
 
 A Home Assistant custom integration for RainPoint Smart+ irrigation devices via the RainPoint cloud API.
@@ -36,12 +36,12 @@ All devices communicate via the RainPoint cloud backend. There is no local LAN p
 This integration is part of the default HACS store, so no custom repository is needed.
 
 1. In Home Assistant, open **HACS** from the sidebar.
-2. Search for **RainPoint Cloud** and open it.
+2. Search for **RainPoint Spenceh14** and open it.
 3. Click **Download** to install it.
 4. Restart Home Assistant.
-5. Go to **Settings → Devices & Services → Add Integration** and search for **RainPoint Cloud**.
+5. Go to **Settings → Devices & Services → Add Integration** and search for **RainPoint Spenceh14**.
 
-> Installing an older release? Versions published before HACS default inclusion may require adding `funkadelic/ha-rainpoint` as a custom repository (category **Integration**) first.
+> Installing an older release? Versions published before HACS default inclusion may require adding `spenceh14/ha-rainpoint` as a custom repository (category **Integration**) first.
 
 ---
 
@@ -103,6 +103,6 @@ The original MIT license is preserved. See [LICENSE](LICENSE).
 
 ## Contributing / Issues
 
-Report bugs and request features at: <https://github.com/funkadelic/ha-rainpoint/issues>
+Report bugs and request features at: <https://github.com/spenceh14/ha-rainpoint/issues>
 
 Contributions are welcome. See [CONTRIBUTING.md](CONTRIBUTING.md) for development setup (venv, Pylance, running tests).

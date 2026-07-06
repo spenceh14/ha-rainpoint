@@ -6,7 +6,7 @@ from unittest.mock import MagicMock
 
 import pytest
 
-from custom_components.rainpoint.const import (
+from custom_components.rainpoint_spenceh14.const import (
     DOMAIN,
     MODEL_DISPLAY_HUB,
     MODEL_HCS003FRF,
@@ -34,7 +34,7 @@ from custom_components.rainpoint.const import (
     MODEL_MOISTURE_SIMPLE,
     MODEL_RAIN,
 )
-from custom_components.rainpoint.sensor import (
+from custom_components.rainpoint_spenceh14.sensor import (
     DisplayHubReadingSensor,
     RainPointCO2BatterySensor,
     RainPointCO2HighSensor,
@@ -260,7 +260,7 @@ class TestAsyncSetupEntryDispatch:
     @pytest.mark.asyncio
     async def test_setup_entry_hub_sensors_created(self):
         """Hub list -> 3 hub sensors (DeviceID, Firmware, MAC) per hub."""
-        from custom_components.rainpoint.hub_entities import (
+        from custom_components.rainpoint_spenceh14.hub_entities import (
             RainPointHubDeviceIDSensor,
             RainPointHubFirmwareSensor,
             RainPointHubMACSensor,
@@ -991,7 +991,7 @@ class TestHCSSensorDispatch:
     )
     async def test_core_models_dispatch(self, model, count):
         """Core non-HCS-variant models also dispatch to their entity classes."""
-        from custom_components.rainpoint.const import MODEL_CO2, MODEL_FLOWMETER, MODEL_TEMPHUM
+        from custom_components.rainpoint_spenceh14.const import MODEL_CO2, MODEL_FLOWMETER, MODEL_TEMPHUM
 
         MODEL_TO_CONST = {
             "HCS010WRF": MODEL_FLOWMETER,
@@ -1039,7 +1039,7 @@ class TestHCSSensorDispatch:
     @pytest.mark.asyncio
     async def test_pool_plus_creates_9_entities(self):
         """MODEL_POOL_PLUS creates 9 reading sensors + 1 raw payload."""
-        from custom_components.rainpoint.const import MODEL_POOL_PLUS
+        from custom_components.rainpoint_spenceh14.const import MODEL_POOL_PLUS
 
         sensor_key = "100_200_1"
         sensor_info = make_sensor_entry(
@@ -1070,7 +1070,7 @@ class TestHCSSensorDispatch:
     @pytest.mark.asyncio
     async def test_pool_creates_4_entities(self):
         """MODEL_POOL creates 4 reading sensors + 1 raw payload."""
-        from custom_components.rainpoint.const import MODEL_POOL
+        from custom_components.rainpoint_spenceh14.const import MODEL_POOL
 
         sensor_key = "100_200_1"
         sensor_info = make_sensor_entry(

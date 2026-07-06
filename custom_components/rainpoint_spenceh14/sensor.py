@@ -1089,7 +1089,7 @@ class RainPointUnknownSensor(RainPointSensorBase):
 
         attrs["model"] = data.get("model")
         attrs["raw_payload"] = data.get("raw_value")
-        attrs["report_url"] = "https://github.com/funkadelic/ha-rainpoint/issues"
+        attrs["report_url"] = "https://github.com/spenceh14/ha-rainpoint/issues"
         attrs["instructions"] = (
             "This sensor model is not yet supported. Please open a GitHub issue with the model and raw_payload values above."
         )

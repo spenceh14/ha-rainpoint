@@ -2,7 +2,7 @@
 
 import pytest
 
-from custom_components.rainpoint.api import (
+from custom_components.rainpoint_spenceh14.api import (
     _battery_status_to_percent,
     _extract_rssi,
     _extract_status_code,

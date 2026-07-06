@@ -1,6 +1,6 @@
 # Changelog
 
-All notable changes to the RainPoint Cloud integration will be documented in this file.
+All notable changes to the RainPoint Spenceh14 integration will be documented in this file.
 
 ## [1.5.3](https://github.com/funkadelic/ha-rainpoint/compare/v1.5.2...v1.5.3) (2026-06-23)
 

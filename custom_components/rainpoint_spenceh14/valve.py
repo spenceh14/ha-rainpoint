@@ -183,7 +183,7 @@ class RainPointValveEntity(CoordinatorEntity, ValveEntity):
         addr = self._sensor_info["addr"]
         unique_id = f"rainpoint_{hid}_{mid}_{addr}_zone{self._zone_num}_duration"
         registry = er.async_get(self.hass)
-        entity_id = registry.async_get_entity_id("number", "rainpoint", unique_id)
+        entity_id = registry.async_get_entity_id("number", "rainpoint_spenceh14", unique_id)
         if entity_id:
             state = self.hass.states.get(entity_id)
             if state is not None:

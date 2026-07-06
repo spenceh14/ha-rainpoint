@@ -2,8 +2,8 @@
 
 from __future__ import annotations
 
-from custom_components.rainpoint.const import DOMAIN
-from custom_components.rainpoint.device import RainPointHubDevice, RainPointSubDevice
+from custom_components.rainpoint_spenceh14.const import DOMAIN
+from custom_components.rainpoint_spenceh14.device import RainPointHubDevice, RainPointSubDevice
 
 
 class TestRainPointHubDevice:

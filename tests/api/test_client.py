@@ -6,7 +6,7 @@ from unittest.mock import AsyncMock, MagicMock
 
 import pytest
 
-from custom_components.rainpoint.api import RainPointApiError, RainPointClient
+from custom_components.rainpoint_spenceh14.api import RainPointApiError, RainPointClient
 
 
 def _make_client() -> RainPointClient:
@@ -377,7 +377,7 @@ class TestTokenManagement:
 
     def test_restore_tokens_bad_timestamp_falls_back_to_none(self):
         """A non-numeric token_expires_at is caught and _token_expires_at stays None."""
-        from custom_components.rainpoint.const import (
+        from custom_components.rainpoint_spenceh14.const import (
             CONF_REFRESH_TOKEN,
             CONF_TOKEN,
             CONF_TOKEN_EXPIRES_AT,
