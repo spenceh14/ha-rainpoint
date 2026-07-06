@@ -1,6 +1,5 @@
 {
     "name": "RainPoint Spenceh14",
-    "zip_release": true,
     "render_readme": true,
     "homeassistant": "2024.5.0"
 }
