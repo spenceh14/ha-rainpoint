@@ -196,17 +196,17 @@ def _scan_htv213_dp_map(b: bytes) -> dict[int, tuple[int, int]]:
     return dp_map
 
 
-def _extract_htv213_hub_state(dp_map: dict[int, tuple[int, int]], raw: str) -> tuple[bool, int | None]:
+def _extract_htv213_hub_state(dp_map: dict[int, tuple[int, int]], raw: str) -> tuple[bool | None, int | None]:
     """Pull (hub_online, hub_state_raw) from the dp_map.
 
     Hub online DP is 0x18 with type 0xDC enforced; value 0x01 means online.
     """
     if 0x18 not in dp_map:
-        _LOGGER.warning(
-            "HTV213FRF: hub online DP (0x18) absent from payload %r; defaulting hub_online=False",
+        _LOGGER.debug(
+            "HTV213FRF: hub online DP (0x18) absent from payload %r; leaving hub_online unknown",
             raw,
         )
-        return False, None
+        return None, None
 
     hub_type, hub_state_raw = dp_map[0x18]
     if hub_type != 0xDC:
@@ -214,7 +214,7 @@ def _extract_htv213_hub_state(dp_map: dict[int, tuple[int, int]], raw: str) -> t
             "HTV213FRF: hub DP 0x18 has unexpected type 0x%02X (expected 0xDC); ignoring hub state",
             hub_type,
         )
-        return False, hub_state_raw
+        return None, hub_state_raw
     return hub_state_raw == 0x01, hub_state_raw
 
 

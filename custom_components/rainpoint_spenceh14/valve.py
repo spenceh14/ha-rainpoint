@@ -113,7 +113,7 @@ class RainPointValveEntity(CoordinatorEntity, ValveEntity):
         decoded = info.get("data")
         if not decoded:
             return False
-        return decoded.get("hub_online", False)
+        return decoded.get("hub_online") is not False
 
     @property
     def is_closed(self) -> bool | None:
