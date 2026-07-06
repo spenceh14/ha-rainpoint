@@ -83,6 +83,7 @@ from .const import (
     MODEL_TEMPHUM,
     MODEL_VALVE_213,  # HTV213FRF support
     MODEL_VALVE_245,  # HTV245FRF support
+    MODEL_VALVE_345,  # HTV345FRF support
     MODEL_VALVE_HUB,
     debug_with_version,
 )
@@ -102,6 +103,7 @@ DECODER_REGISTRY = {
     MODEL_VALVE_HUB: decode_valve_hub,
     MODEL_VALVE_213: decode_htv213frf_valve,  # HTV213FRF uses custom decoder
     MODEL_VALVE_245: decode_htv213frf_valve,  # HTV245FRF uses custom decoder
+    MODEL_VALVE_345: decode_htv213frf_valve,  # HTV345FRF uses custom decoder
     # HCS sensor models (v1.3.0)
     MODEL_HCS005FRF: decode_hcs005frf,
     MODEL_HCS003FRF: decode_hcs003frf,

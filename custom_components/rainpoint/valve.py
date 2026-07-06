@@ -13,7 +13,7 @@ from homeassistant.helpers.entity_platform import AddEntitiesCallback
 from homeassistant.helpers.update_coordinator import CoordinatorEntity
 
 from .api import decode_htv213frf_valve, decode_valve_hub
-from .const import DOMAIN, MODEL_VALVE_213, MODEL_VALVE_245, MODEL_VALVE_HUB
+from .const import DOMAIN, MODEL_VALVE_213, MODEL_VALVE_245, MODEL_VALVE_345, MODEL_VALVE_HUB
 from .coordinator import RainPointCoordinator
 
 _LOGGER = logging.getLogger(__name__)
@@ -36,7 +36,7 @@ async def async_setup_entry(
 
     for key, info in sensors_cfg.items():
         model = info.get("model")
-        if model not in [MODEL_VALVE_HUB, MODEL_VALVE_213, MODEL_VALVE_245]:
+        if model not in [MODEL_VALVE_HUB, MODEL_VALVE_213, MODEL_VALVE_245, MODEL_VALVE_345]:
             continue
 
         decoded = info.get("data") or {}
@@ -207,7 +207,7 @@ class RainPointValveEntity(CoordinatorEntity, ValveEntity):
         if not raw_state:
             return
         model = self._sensor_info.get("model", "")
-        if model in (MODEL_VALVE_213, MODEL_VALVE_245):
+        if model in (MODEL_VALVE_213, MODEL_VALVE_245, MODEL_VALVE_345):
             decoded = decode_htv213frf_valve(raw_state)
         else:
             decoded = decode_valve_hub(raw_state)
