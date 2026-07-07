@@ -6,8 +6,8 @@ from unittest.mock import MagicMock
 
 import pytest
 
-from custom_components.rainpoint.const import DOMAIN
-from custom_components.rainpoint.select import async_setup_entry
+from custom_components.rainpoint_spenceh14.const import DOMAIN
+from custom_components.rainpoint_spenceh14.select import async_setup_entry
 
 
 def _make_hass(hubs=None):

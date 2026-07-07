@@ -2,7 +2,7 @@
 
 import pytest
 
-from custom_components.rainpoint.api import (
+from custom_components.rainpoint_spenceh14.api import (
     _base_decoder_dict,
     _f10_to_c,
     _le16,

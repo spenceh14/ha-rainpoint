@@ -6,7 +6,7 @@ from unittest.mock import MagicMock
 
 import pytest
 
-from custom_components.rainpoint.hub_entities import (
+from custom_components.rainpoint_spenceh14.hub_entities import (
     RainPointHubBroadcastSwitch,
     RainPointHubChannelSelect,
     RainPointHubDeviceIDSensor,

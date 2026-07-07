@@ -1,5 +1,5 @@
 # Display Hub model constant
-DOMAIN = "rainpoint"
+DOMAIN = "rainpoint_spenceh14"
 
 # Integration version
 VERSION = "1.5.3"  # x-release-please-version

@@ -1,5 +1,5 @@
 [tool.coverage.run]
-omit = ["custom_components/rainpoint/debug.py"]
+omit = ["custom_components/rainpoint_spenceh14/debug.py"]
 
 [tool.coverage.report]
 fail_under = 99
@@ -11,7 +11,7 @@ python_classes = "Test*"
 python_functions = "test_*"
 asyncio_mode = "auto"
 addopts = [
-    "--cov=custom_components.rainpoint",
+    "--cov=custom_components.rainpoint_spenceh14",
     "--cov-branch",
     "--cov-report=term-missing",
     "--cov-report=html",
@@ -34,4 +34,4 @@ select = [
 ]
 
 [tool.ruff.lint.isort]
-known-first-party = ["custom_components.rainpoint"]
+known-first-party = ["custom_components.rainpoint_spenceh14"]

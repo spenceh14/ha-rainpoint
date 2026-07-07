@@ -20,7 +20,7 @@ import pytest
 # self._notified_unknown_models, self.hass, and self.logger — all attributes we
 # can set on a SimpleNamespace.
 # ---------------------------------------------------------------------------
-import custom_components.rainpoint.coordinator as _coord_module
+import custom_components.rainpoint_spenceh14.coordinator as _coord_module
 
 assert "_async_update_data" in _coord_module.RainPointCoordinator.__dict__, (
     "RainPointCoordinator._async_update_data missing or renamed; update tests accordingly"
@@ -30,8 +30,8 @@ _async_update_data_fn = _coord_module.RainPointCoordinator.__dict__["_async_upda
 
 DECODER_REGISTRY = _coord_module.DECODER_REGISTRY
 
-from custom_components.rainpoint.api import RainPointApiError  # noqa: E402
-from custom_components.rainpoint.const import (  # noqa: E402
+from custom_components.rainpoint_spenceh14.api import RainPointApiError  # noqa: E402
+from custom_components.rainpoint_spenceh14.const import (  # noqa: E402
     MODEL_CO2,
     MODEL_DISPLAY_HUB,
     MODEL_FLOWMETER,
@@ -570,7 +570,7 @@ class TestCoordinatorConstructor:
         # fine -- we only care that the RainPoint-specific assignments ran).
         from types import SimpleNamespace
 
-        import custom_components.rainpoint.coordinator as coord_mod
+        import custom_components.rainpoint_spenceh14.coordinator as coord_mod
 
         real_init = coord_mod.RainPointCoordinator.__dict__["__init__"]
 
@@ -591,7 +591,7 @@ class TestCoordinatorConstructor:
         """__init__ falls back to [] when CONF_HIDS missing from entry.data."""
         from types import SimpleNamespace
 
-        import custom_components.rainpoint.coordinator as coord_mod
+        import custom_components.rainpoint_spenceh14.coordinator as coord_mod
 
         real_init = coord_mod.RainPointCoordinator.__dict__["__init__"]
 

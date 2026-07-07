@@ -1,5 +1,5 @@
 {
-    "domain": "rainpoint",
+    "domain": "rainpoint_spenceh14",
     "name": "RainPoint Cloud",
     "codeowners": [
         "@funkadelic"
@@ -10,7 +10,7 @@
     "iot_class": "cloud_polling",
     "issue_tracker": "https://github.com/funkadelic/ha-rainpoint/issues",
     "loggers": [
-        "custom_components.rainpoint"
+        "custom_components.rainpoint_spenceh14"
     ],
     "requirements": [],
     "version": "1.5.3"

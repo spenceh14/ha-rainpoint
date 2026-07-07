@@ -30,8 +30,8 @@ jobs:
       - name: Package integration
         if: ${{ steps.release.outputs.release_created }}
         run: |
-          cd custom_components/rainpoint
-          zip -r ../../rainpoint.zip .
+          cd custom_components/rainpoint_spenceh14
+          zip -r ../../rainpoint_spenceh14.zip .
 
       - name: Upload release asset
         if: ${{ steps.release.outputs.release_created }}
@@ -39,4 +39,4 @@ jobs:
           GITHUB_TOKEN: ${{ steps.app-token.outputs.token }}
           TAG_NAME: ${{ steps.release.outputs.tag_name }}
         run: |
-          gh release upload "$TAG_NAME" rainpoint.zip
+          gh release upload "$TAG_NAME" rainpoint_spenceh14.zip

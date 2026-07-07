@@ -14,9 +14,9 @@ _LOGGER = logging.getLogger(__name__)
 
 _RELOAD_FAILED_MSG = "Failed to reload RainPoint integration"
 
-_NOTIF_SUCCESS = ("RainPoint Reload Complete", "rainpoint_reload_success")
-_NOTIF_PARTIAL = ("RainPoint Reload Partial", "rainpoint_reload_partial")
-_NOTIF_FAILED = ("RainPoint Reload Failed", "rainpoint_reload_error")
+_NOTIF_SUCCESS = ("RainPoint Reload Complete", "rainpoint_spenceh14_reload_success")
+_NOTIF_PARTIAL = ("RainPoint Reload Partial", "rainpoint_spenceh14_reload_partial")
+_NOTIF_FAILED = ("RainPoint Reload Failed", "rainpoint_spenceh14_reload_error")
 
 _ReloadStatus = Literal["success", "partial", "failed"]
 _RELOAD_STATUS_NOTIFS: dict[_ReloadStatus, tuple[str, str]] = {

@@ -58,7 +58,7 @@ class RainPointHubDeviceIDSensor(RainPointHubSensorBase):
 
     def __init__(self, coordinator: RainPointCoordinator, hub_info: dict):
         super().__init__(coordinator, hub_info)
-        self._attr_unique_id = f"rainpoint_hub_{hub_info.get('hid', 'unknown')}_device_id"
+        self._attr_unique_id = f"rainpoint_spenceh14_hub_{hub_info.get('hid', 'unknown')}_device_id"
         self._attr_name = f"{hub_info.get('name', 'RainPoint Hub')} Device ID"
 
     @property
@@ -73,7 +73,7 @@ class RainPointHubFirmwareSensor(RainPointHubSensorBase):
 
     def __init__(self, coordinator: RainPointCoordinator, hub_info: dict):
         super().__init__(coordinator, hub_info)
-        self._attr_unique_id = f"rainpoint_hub_{hub_info.get('hid', 'unknown')}_firmware"
+        self._attr_unique_id = f"rainpoint_spenceh14_hub_{hub_info.get('hid', 'unknown')}_firmware"
         self._attr_name = f"{hub_info.get('name', 'RainPoint Hub')} Firmware Version"
 
     @property
@@ -88,7 +88,7 @@ class RainPointHubMACSensor(RainPointHubSensorBase):
 
     def __init__(self, coordinator: RainPointCoordinator, hub_info: dict):
         super().__init__(coordinator, hub_info)
-        self._attr_unique_id = f"rainpoint_hub_{hub_info.get('hid', 'unknown')}_mac"
+        self._attr_unique_id = f"rainpoint_spenceh14_hub_{hub_info.get('hid', 'unknown')}_mac"
         self._attr_name = f"{hub_info.get('name', 'RainPoint Hub')} MAC Address"
 
     @property
@@ -105,7 +105,7 @@ class RainPointHubChannelSelect(CoordinatorEntity, SelectEntity, RainPointHubDev
     def __init__(self, coordinator: RainPointCoordinator, hub_info: dict):
         CoordinatorEntity.__init__(self, coordinator)
         RainPointHubDevice.__init__(self, hub_info)
-        self._attr_unique_id = f"rainpoint_hub_{hub_info.get('hid', 'unknown')}_channel"
+        self._attr_unique_id = f"rainpoint_spenceh14_hub_{hub_info.get('hid', 'unknown')}_channel"
         self._attr_name = f"{hub_info.get('name', 'RainPoint Hub')} RF Channel"
         self._attr_options = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16"]
         self._attr_current_option = None  # Unknown until API supports reading
@@ -132,7 +132,7 @@ class RainPointHubBroadcastSwitch(CoordinatorEntity, SwitchEntity, RainPointHubD
     def __init__(self, coordinator: RainPointCoordinator, hub_info: dict):
         CoordinatorEntity.__init__(self, coordinator)
         RainPointHubDevice.__init__(self, hub_info)
-        self._attr_unique_id = f"rainpoint_hub_{hub_info.get('hid', 'unknown')}_broadcast"
+        self._attr_unique_id = f"rainpoint_spenceh14_hub_{hub_info.get('hid', 'unknown')}_broadcast"
         self._attr_name = f"{hub_info.get('name', 'RainPoint Hub')} Automatic Broadcast"
         self._attr_is_on = None  # Unknown until API supports reading
 

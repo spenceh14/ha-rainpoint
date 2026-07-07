@@ -6,8 +6,8 @@ from unittest.mock import MagicMock
 
 import pytest
 
-from custom_components.rainpoint.const import DOMAIN, MODEL_VALVE_345
-from custom_components.rainpoint.number import (
+from custom_components.rainpoint_spenceh14.const import DOMAIN, MODEL_VALVE_345
+from custom_components.rainpoint_spenceh14.number import (
     DURATION_DEFAULT_MINUTES,
     DURATION_MAX_MINUTES,
     DURATION_MIN_MINUTES,
@@ -40,7 +40,7 @@ def _make_number(current_value=10.0, firmware_version="1.0"):
     num._sensor_info = sensor_info
     num._zone_num = 1
     num._current_value = current_value
-    num._attr_unique_id = "rainpoint_100_200_1_zone1_duration"
+    num._attr_unique_id = "rainpoint_spenceh14_100_200_1_zone1_duration"
     num._attr_name = "Valve Hub 1 Zone 1 Duration"
     num.hass = MagicMock()
     num.async_write_ha_state = MagicMock()
@@ -163,7 +163,7 @@ class TestNumberConstructor:
 
     def test_constructor_builds_unique_id_and_name(self):
         """__init__ assembles unique_id + name from sensor_info + zone_num."""
-        import custom_components.rainpoint.number as num_mod
+        import custom_components.rainpoint_spenceh14.number as num_mod
 
         real_init = num_mod.RainPointZoneDurationNumber.__dict__["__init__"]
 
@@ -182,12 +182,12 @@ class TestNumberConstructor:
         assert inst._sensor_key == "100_200_1"
         assert inst._zone_num == 2
         assert inst._current_value == num_mod.DURATION_DEFAULT_MINUTES
-        assert inst._attr_unique_id == "rainpoint_100_200_1_zone2_duration"
+        assert inst._attr_unique_id == "rainpoint_spenceh14_100_200_1_zone2_duration"
         assert inst._attr_name == "Front Yard Zone 2 Duration"
 
     def test_constructor_fallback_sub_name(self):
         """Missing sub_name falls back to 'Valve Hub {addr}'."""
-        import custom_components.rainpoint.number as num_mod
+        import custom_components.rainpoint_spenceh14.number as num_mod
 
         real_init = num_mod.RainPointZoneDurationNumber.__dict__["__init__"]
 
@@ -212,7 +212,7 @@ class TestNumberAsyncAddedToHass:
         last_state.state = "25.0"
         num.async_get_last_state = AsyncMock(return_value=last_state)
 
-        import custom_components.rainpoint.number as num_mod
+        import custom_components.rainpoint_spenceh14.number as num_mod
 
         real_fn = num_mod.RainPointZoneDurationNumber.__dict__["async_added_to_hass"]
         await real_fn(num)
@@ -229,7 +229,7 @@ class TestNumberAsyncAddedToHass:
         last_state.state = "999.0"  # way above max
         num.async_get_last_state = AsyncMock(return_value=last_state)
 
-        import custom_components.rainpoint.number as num_mod
+        import custom_components.rainpoint_spenceh14.number as num_mod
 
         real_fn = num_mod.RainPointZoneDurationNumber.__dict__["async_added_to_hass"]
         await real_fn(num)
@@ -246,7 +246,7 @@ class TestNumberAsyncAddedToHass:
         last_state.state = "not-a-number"
         num.async_get_last_state = AsyncMock(return_value=last_state)
 
-        import custom_components.rainpoint.number as num_mod
+        import custom_components.rainpoint_spenceh14.number as num_mod
 
         real_fn = num_mod.RainPointZoneDurationNumber.__dict__["async_added_to_hass"]
         await real_fn(num)
@@ -261,7 +261,7 @@ class TestNumberAsyncAddedToHass:
         num = _make_number(current_value=10.0)
         num.async_get_last_state = AsyncMock(return_value=None)
 
-        import custom_components.rainpoint.number as num_mod
+        import custom_components.rainpoint_spenceh14.number as num_mod
 
         real_fn = num_mod.RainPointZoneDurationNumber.__dict__["async_added_to_hass"]
         await real_fn(num)
@@ -275,7 +275,7 @@ class TestNumberSetupEntry:
     @pytest.mark.asyncio
     async def test_setup_entry_creates_one_number_per_zone(self):
         """One RainPointZoneDurationNumber entity is added per zone per valve sensor."""
-        from custom_components.rainpoint.number import async_setup_entry
+        from custom_components.rainpoint_spenceh14.number import async_setup_entry
 
         coord = MagicMock()
         coord.data = {
@@ -305,7 +305,7 @@ class TestNumberSetupEntry:
     @pytest.mark.asyncio
     async def test_setup_entry_creates_numbers_for_valve_345(self):
         """HTV345FRF creates one duration number per reported zone."""
-        from custom_components.rainpoint.number import async_setup_entry
+        from custom_components.rainpoint_spenceh14.number import async_setup_entry
 
         coord = MagicMock()
         coord.data = {
@@ -336,7 +336,7 @@ class TestNumberSetupEntry:
     @pytest.mark.asyncio
     async def test_setup_entry_skips_non_valve_models(self):
         """Non-valve models are skipped and produce no number entities."""
-        from custom_components.rainpoint.number import async_setup_entry
+        from custom_components.rainpoint_spenceh14.number import async_setup_entry
 
         coord = MagicMock()
         coord.data = {
@@ -364,7 +364,7 @@ class TestNumberSetupEntry:
     @pytest.mark.asyncio
     async def test_setup_entry_no_zones_skips(self):
         """A valve sensor with no zones produces no entities."""
-        from custom_components.rainpoint.number import async_setup_entry
+        from custom_components.rainpoint_spenceh14.number import async_setup_entry
 
         coord = MagicMock()
         coord.data = {
