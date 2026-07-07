@@ -223,6 +223,12 @@ class RainPointValveEntity(CoordinatorEntity, ValveEntity):
         current["sensors"] = sensors
         self.coordinator.async_set_updated_data(current)
 
+    def _record_successful_command(self) -> None:
+        """Tell the coordinator this zone has command-fresh state."""
+        record_command = getattr(self.coordinator, "record_valve_command", None)
+        if callable(record_command):
+            record_command(self._sensor_key, self._zone_num)
+
     # ------------------------------------------------------------------
     async def async_open_valve(self, **kwargs: Any) -> None:
         duration = int(kwargs["duration"]) if "duration" in kwargs else self._get_configured_duration_seconds()
@@ -249,6 +255,7 @@ class RainPointValveEntity(CoordinatorEntity, ValveEntity):
             mode=1,
             duration=duration,
         )
+        self._record_successful_command()
         self._apply_response_state(response_state)
 
     async def async_close_valve(self, **kwargs: Any) -> None:
@@ -274,4 +281,5 @@ class RainPointValveEntity(CoordinatorEntity, ValveEntity):
             mode=0,
             duration=0,
         )
+        self._record_successful_command()
         self._apply_response_state(response_state)

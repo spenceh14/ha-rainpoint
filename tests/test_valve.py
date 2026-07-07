@@ -191,6 +191,34 @@ class TestValveControl:
             duration=0,
         )
 
+    @pytest.mark.asyncio
+    async def test_async_close_valve_applies_closed_response_state(self, monkeypatch):
+        """A successful close response immediately updates coordinator state."""
+        from custom_components.rainpoint import valve as valve_mod
+
+        valve = _make_valve(model=MODEL_VALVE_245)
+        valve.coordinator.async_set_updated_data = MagicMock()
+        valve.coordinator.record_valve_command = MagicMock()
+        valve.coordinator._client.control_work_mode = AsyncMock(return_value="close-response")
+        monkeypatch.setattr(
+            valve_mod,
+            "decode_htv213frf_valve",
+            MagicMock(
+                return_value={
+                    "type": "valve_hub",
+                    "hub_online": True,
+                    "zones": {1: {"open": False, "duration_seconds": 0, "state_raw": 0}},
+                }
+            ),
+        )
+
+        await valve.async_close_valve()
+
+        valve.coordinator.record_valve_command.assert_called_once_with("100_200_1", 1)
+        updated = valve.coordinator.async_set_updated_data.call_args.args[0]
+        assert updated["sensors"]["100_200_1"]["data"]["zones"][1]["open"] is False
+        assert updated["sensors"]["100_200_1"]["data"]["zones"][1]["duration_seconds"] == 0
+
     def test_apply_response_state_updates_coordinator(self):
         """_apply_response_state should call async_set_updated_data when raw_state given."""
         valve = _make_valve(model=MODEL_VALVE_245)
