@@ -6,8 +6,8 @@ This repository uses [release-please](https://github.com/googleapis/release-plea
 
 The version is tracked in two files:
 
-- `custom_components/rainpoint_spenceh14/manifest.json` — the canonical source (read by HACS)
-- `custom_components/rainpoint_spenceh14/const.py` (`VERSION`) — used in runtime logging
+- `custom_components/rainpoint/manifest.json` — the canonical source (read by HACS)
+- `custom_components/rainpoint/const.py` (`VERSION`) — used in runtime logging
 
 Both are updated by release-please in its auto-generated release PR. When that PR is merged, the version bumps land on `main` and trigger tag/release creation.
 
