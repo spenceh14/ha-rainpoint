@@ -1,8 +1,8 @@
-"""Tests for custom_components.rainpoint_spenceh14.country_codes."""
+"""Tests for custom_components.rainpoint.country_codes."""
 
 from unittest.mock import MagicMock
 
-from custom_components.rainpoint_spenceh14.country_codes import (
+from custom_components.rainpoint.country_codes import (
     COUNTRY_NAMES,
     COUNTRY_TO_PHONE_CODE,
     get_country_code_options,

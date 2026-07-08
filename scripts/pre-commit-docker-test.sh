@@ -9,7 +9,7 @@ echo "Running pre-commit Docker testing..."
 
 # Check README version matches manifest version
 echo "Checking README version..."
-MANIFEST_VERSION=$(grep '"version"' custom_components/rainpoint_spenceh14/manifest.json | sed 's/.*"version": "\(.*\)".*/\1/')
+MANIFEST_VERSION=$(grep '"version"' custom_components/rainpoint/manifest.json | sed 's/.*"version": "\(.*\)".*/\1/')
 README_VERSION=$(grep '"version":' README.md | head -1 | sed 's/.*"version": "\(.*\)".*/\1/')
 
 if [ "$MANIFEST_VERSION" != "$README_VERSION" ]; then
@@ -33,14 +33,14 @@ echo "Docker container 'ha-test' is running"
 
 # Remove stale files and copy integration to Docker container
 echo "Cleaning target directory in container..."
-docker exec ha-test rm -rf /config/custom_components/rainpoint_spenceh14 > /dev/null 2>&1
-docker exec ha-test mkdir -p /config/custom_components/rainpoint_spenceh14 > /dev/null 2>&1
+docker exec ha-test rm -rf /config/custom_components/rainpoint > /dev/null 2>&1
+docker exec ha-test mkdir -p /config/custom_components/rainpoint > /dev/null 2>&1
 echo "Copying integration to Docker container..."
-docker cp custom_components/rainpoint_spenceh14 ha-test:/config/custom_components/ > /dev/null 2>&1
+docker cp custom_components/rainpoint ha-test:/config/custom_components/ > /dev/null 2>&1
 
 # Copy updated files
-docker cp custom_components/rainpoint_spenceh14/const.py ha-test:/config/custom_components/rainpoint_spenceh14/const.py > /dev/null 2>&1
-docker cp custom_components/rainpoint_spenceh14/manifest.json ha-test:/config/custom_components/rainpoint_spenceh14/manifest.json > /dev/null 2>&1
+docker cp custom_components/rainpoint/const.py ha-test:/config/custom_components/rainpoint/const.py > /dev/null 2>&1
+docker cp custom_components/rainpoint/manifest.json ha-test:/config/custom_components/rainpoint/manifest.json > /dev/null 2>&1
 
 # Restart Docker container
 echo "Restarting Docker container..."
@@ -58,10 +58,10 @@ sleep 5  # Wait for container to fully start
 RECENT_LOGS=$(docker logs ha-test --since="60s" 2>&1)
 
 # Check for setup failures in recent logs
-if echo "$RECENT_LOGS" | grep -q "Setup failed for custom integration 'rainpoint_spenceh14'"; then
+if echo "$RECENT_LOGS" | grep -q "Setup failed for custom integration 'rainpoint'"; then
     echo "ERROR: Integration setup failed in Docker"
     echo "Recent error details:"
-    echo "$RECENT_LOGS" | grep "Setup failed for custom integration 'rainpoint_spenceh14'" -A 3 | tail -10
+    echo "$RECENT_LOGS" | grep "Setup failed for custom integration 'rainpoint'" -A 3 | tail -10
     exit 1
 fi
 
@@ -83,10 +83,10 @@ fi
 
 # Verify version is loaded
 echo "Verifying version is loaded..."
-VERSION=$(grep "VERSION = " custom_components/rainpoint_spenceh14/const.py | cut -d'"' -f2)
+VERSION=$(grep "VERSION = " custom_components/rainpoint/const.py | cut -d'"' -f2)
 
 # Test if the integration is working by testing imports
-if echo "$RECENT_LOGS" | grep -q "Setup of domain rainpoint_spenceh14 took"; then
+if echo "$RECENT_LOGS" | grep -q "Setup of domain rainpoint took"; then
     echo "RainPoint integration setup successfully"
     VERSION_LOADED=true
 else
@@ -112,7 +112,7 @@ echo "Testing ASCII format decoding..."
 ASCII_TEST_RESULT=$(docker exec ha-test python3 -c "
 import sys
 sys.path.append('/config/custom_components')
-from custom_components.rainpoint_spenceh14.api import decode_htv213frf_valve
+from custom_components.rainpoint.api import decode_htv213frf_valve
 result = decode_htv213frf_valve('1,-84,1;0,149,0,0,0,0|0,6,0,0,0,0')
 print(f'ASCII_TEST:{result[\"decoder\"]}:{len(result[\"zones\"])}')
 " 2>&1)
@@ -131,7 +131,7 @@ echo "Testing sensor ASCII format decoding..."
 SENSOR_TEST_RESULT=$(docker exec ha-test python3 -c "
 import sys
 sys.path.append('/config/custom_components')
-from custom_components.rainpoint_spenceh14.api import decode_moisture_full
+from custom_components.rainpoint.api import decode_moisture_full
 result = decode_moisture_full('1,-73,1;694,70,G=292478')
 # Test temperature is in expected range (20.77-20.78°C for 69.4°F)
 temp = result['temperature_c']
@@ -155,7 +155,7 @@ echo "Testing API client critical methods..."
 API_CLIENT_TEST=$(docker exec ha-test python3 -c "
 import sys
 sys.path.append('/config/custom_components')
-from custom_components.rainpoint_spenceh14.api.client import RainPointClient
+from custom_components.rainpoint.api.client import RainPointClient
 import inspect
 
 required_methods = ['ensure_logged_in', '_login', '_token_valid', 'list_homes', 'get_devices_by_hid', 'control_work_mode']
@@ -187,7 +187,7 @@ echo "Testing Display Hub decoder..."
 DISPLAY_HUB_TEST=$(docker exec ha-test python3 -c "
 import sys
 sys.path.append('/config/custom_components')
-from custom_components.rainpoint_spenceh14.api import decode_hws019wrf_v2
+from custom_components.rainpoint.api import decode_hws019wrf_v2
 
 result = decode_hws019wrf_v2('1,0,1;707(707/694/1),42(42/39/1),P=9709(9709/9701/1),')
 readings = result.get('readings', {})
@@ -218,7 +218,7 @@ import json
 sys.path.append('/config/custom_components')
 
 try:
-    with open('/config/custom_components/rainpoint_spenceh14/translations/en.json', 'r') as f:
+    with open('/config/custom_components/rainpoint/translations/en.json', 'r') as f:
         translations = json.load(f)
 
     if 'config' not in translations:

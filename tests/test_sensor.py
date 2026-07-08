@@ -6,7 +6,7 @@ from unittest.mock import MagicMock
 
 import pytest
 
-from custom_components.rainpoint_spenceh14.const import (
+from custom_components.rainpoint.const import (
     DOMAIN,
     MODEL_DISPLAY_HUB,
     MODEL_HCS003FRF,
@@ -34,7 +34,7 @@ from custom_components.rainpoint_spenceh14.const import (
     MODEL_MOISTURE_SIMPLE,
     MODEL_RAIN,
 )
-from custom_components.rainpoint_spenceh14.sensor import (
+from custom_components.rainpoint.sensor import (
     DisplayHubReadingSensor,
     RainPointCO2BatterySensor,
     RainPointCO2HighSensor,
@@ -260,7 +260,7 @@ class TestAsyncSetupEntryDispatch:
     @pytest.mark.asyncio
     async def test_setup_entry_hub_sensors_created(self):
         """Hub list -> 3 hub sensors (DeviceID, Firmware, MAC) per hub."""
-        from custom_components.rainpoint_spenceh14.hub_entities import (
+        from custom_components.rainpoint.hub_entities import (
             RainPointHubDeviceIDSensor,
             RainPointHubFirmwareSensor,
             RainPointHubMACSensor,
@@ -403,7 +403,7 @@ class TestMoisturePercentSensor:
             {"type": "moisture_simple", "moisture_percent": moisture_percent, "rssi_dbm": -80, "battery_percent": 75},
         )
         sensor._simple = simple
-        sensor._attr_unique_id = "rainpoint_spenceh14_100_200_1_moisture_percent"
+        sensor._attr_unique_id = "rainpoint_100_200_1_moisture_percent"
         sensor._attr_name = "Test Sensor Moisture Percent"
         return sensor
 
@@ -425,7 +425,7 @@ class TestMoisturePercentSensor:
             None,
         )
         sensor._simple = True
-        sensor._attr_unique_id = "rainpoint_spenceh14_100_200_1_moisture_percent"
+        sensor._attr_unique_id = "rainpoint_100_200_1_moisture_percent"
         sensor._attr_name = "Test Sensor Moisture Percent"
         assert sensor.native_value is None
 
@@ -457,7 +457,7 @@ class TestRainSensor:
             },
         )
         sensor._data_key = data_key
-        sensor._attr_unique_id = f"rainpoint_spenceh14_100_200_1_{data_key}"
+        sensor._attr_unique_id = f"rainpoint_100_200_1_{data_key}"
         sensor._attr_name = "Rain Sensor Rain (Last 24 Hours)"
         return sensor
 
@@ -480,7 +480,7 @@ class TestRainSensor:
         """Rain sensor returns none when no data."""
         sensor = _make_sensor_base(RainPointRainSensor, "100_200_1", None)
         sensor._data_key = "rain_last_24h_mm"
-        sensor._attr_unique_id = "rainpoint_spenceh14_100_200_1_rain_last_24h_mm"
+        sensor._attr_unique_id = "rainpoint_100_200_1_rain_last_24h_mm"
         sensor._attr_name = "Rain Sensor Rain"
         assert sensor.native_value is None
 
@@ -497,7 +497,7 @@ class TestRainSensor:
             {"type": "rain", "rain_last_24h_mm": None},
         )
         sensor._data_key = "rain_last_24h_mm"
-        sensor._attr_unique_id = "rainpoint_spenceh14_100_200_1_rain_last_24h_mm"
+        sensor._attr_unique_id = "rainpoint_100_200_1_rain_last_24h_mm"
         sensor._attr_name = "Rain Sensor Rain (Last 24 Hours)"
         assert sensor.native_value is None
 
@@ -512,7 +512,7 @@ class TestTemperatureSensor:
             "100_200_1",
             {"type": "moisture_full", "moisture_percent": 42, "temperature_c": temperature_c, "illuminance_lux": 1000},
         )
-        sensor._attr_unique_id = "rainpoint_spenceh14_100_200_1_temperature"
+        sensor._attr_unique_id = "rainpoint_100_200_1_temperature"
         sensor._attr_name = "Test Sensor Temperature"
         return sensor
 
@@ -533,7 +533,7 @@ class TestTemperatureSensor:
             "100_200_1",
             {"type": "moisture_full", "moisture_percent": 42},
         )
-        sensor._attr_unique_id = "rainpoint_spenceh14_100_200_1_temperature"
+        sensor._attr_unique_id = "rainpoint_100_200_1_temperature"
         sensor._attr_name = "Test Sensor Temperature"
         assert sensor.native_value is None
 
@@ -556,7 +556,7 @@ class TestDisplayHubReadingSensor:
             {"type": "display_hub", "readings": readings},
         )
         sensor._reading_key = reading_key
-        sensor._attr_unique_id = f"rainpoint_spenceh14_100_200_1_displayhub_{reading_key}"
+        sensor._attr_unique_id = f"rainpoint_100_200_1_displayhub_{reading_key}"
         sensor._attr_name = f"Display Hub {reading_key}"
         return sensor
 
@@ -574,7 +574,7 @@ class TestDisplayHubReadingSensor:
         """Display hub reading sensor none when no data."""
         sensor = _make_sensor_base(DisplayHubReadingSensor, "100_200_1", None)
         sensor._reading_key = "temp"
-        sensor._attr_unique_id = "rainpoint_spenceh14_100_200_1_displayhub_temp"
+        sensor._attr_unique_id = "rainpoint_100_200_1_displayhub_temp"
         sensor._attr_name = "Display Hub temp"
         assert sensor.native_value is None
 
@@ -595,7 +595,7 @@ class TestIlluminanceSensor:
             "100_200_1",
             {"type": "moisture_full", "moisture_percent": 42, "temperature_c": 20.0, "illuminance_lux": illuminance_lux},
         )
-        sensor._attr_unique_id = "rainpoint_spenceh14_100_200_1_illuminance"
+        sensor._attr_unique_id = "rainpoint_100_200_1_illuminance"
         sensor._attr_name = "Test Sensor Illuminance"
         return sensor
 
@@ -611,7 +611,7 @@ class TestIlluminanceSensor:
             "100_200_1",
             {"type": "moisture_full"},
         )
-        sensor._attr_unique_id = "rainpoint_spenceh14_100_200_1_illuminance"
+        sensor._attr_unique_id = "rainpoint_100_200_1_illuminance"
         sensor._attr_name = "Test Sensor Illuminance"
         assert sensor.native_value is None
 
@@ -633,7 +633,7 @@ class TestSensorBaseProperties:
             data,
         )
         sensor._simple = True
-        sensor._attr_unique_id = "rainpoint_spenceh14_100_200_1_moisture_percent"
+        sensor._attr_unique_id = "rainpoint_100_200_1_moisture_percent"
         sensor._attr_name = "Test Sensor Moisture Percent"
         return sensor
 
@@ -785,7 +785,7 @@ _NATIVE_VALUE_CASES = [
 def test_native_value_returns_data_key(cls, data_key, uid_suffix, value):
     """Each simple sensor reads its dedicated data key and returns that value."""
     sensor = _make_sensor_base(cls, "100_200_1", {"type": "x", data_key: value})
-    sensor._attr_unique_id = f"rainpoint_spenceh14_100_200_1_{uid_suffix}"
+    sensor._attr_unique_id = f"rainpoint_100_200_1_{uid_suffix}"
     sensor._attr_name = f"Test Sensor {uid_suffix}"
     assert sensor.native_value == value
 
@@ -794,7 +794,7 @@ def test_native_value_returns_data_key(cls, data_key, uid_suffix, value):
 def test_native_value_none_when_data_missing(cls, data_key, uid_suffix, _value):
     """Each simple sensor returns None when _sensor_data is None."""
     sensor = _make_sensor_base(cls, "100_200_1", None)
-    sensor._attr_unique_id = f"rainpoint_spenceh14_100_200_1_{uid_suffix}"
+    sensor._attr_unique_id = f"rainpoint_100_200_1_{uid_suffix}"
     sensor._attr_name = f"Test Sensor {uid_suffix}"
     assert sensor.native_value is None
 
@@ -819,7 +819,7 @@ class TestUnknownSensor:
             data,
             sensor_info_overrides={"model": model, "sub_name": "Mystery"},
         )
-        sensor._attr_unique_id = f"rainpoint_spenceh14_100_200_1_unknown_{model}"
+        sensor._attr_unique_id = f"rainpoint_100_200_1_unknown_{model}"
         sensor._attr_name = f"Mystery Unsupported ({model})"
         return sensor
 
@@ -858,7 +858,7 @@ class TestRawPayloadSensor:
         # Inject raw_status.value for this test
         key = sensor._sensor_key
         sensor.coordinator.data["sensors"][key]["raw_status"] = {"value": raw_value}
-        sensor._attr_unique_id = "rainpoint_spenceh14_100_200_1_raw_payload"
+        sensor._attr_unique_id = "rainpoint_100_200_1_raw_payload"
         sensor._attr_name = "Sensor Raw Payload"
         return sensor
 
@@ -991,7 +991,7 @@ class TestHCSSensorDispatch:
     )
     async def test_core_models_dispatch(self, model, count):
         """Core non-HCS-variant models also dispatch to their entity classes."""
-        from custom_components.rainpoint_spenceh14.const import MODEL_CO2, MODEL_FLOWMETER, MODEL_TEMPHUM
+        from custom_components.rainpoint.const import MODEL_CO2, MODEL_FLOWMETER, MODEL_TEMPHUM
 
         MODEL_TO_CONST = {
             "HCS010WRF": MODEL_FLOWMETER,
@@ -1039,7 +1039,7 @@ class TestHCSSensorDispatch:
     @pytest.mark.asyncio
     async def test_pool_plus_creates_9_entities(self):
         """MODEL_POOL_PLUS creates 9 reading sensors + 1 raw payload."""
-        from custom_components.rainpoint_spenceh14.const import MODEL_POOL_PLUS
+        from custom_components.rainpoint.const import MODEL_POOL_PLUS
 
         sensor_key = "100_200_1"
         sensor_info = make_sensor_entry(
@@ -1070,7 +1070,7 @@ class TestHCSSensorDispatch:
     @pytest.mark.asyncio
     async def test_pool_creates_4_entities(self):
         """MODEL_POOL creates 4 reading sensors + 1 raw payload."""
-        from custom_components.rainpoint_spenceh14.const import MODEL_POOL
+        from custom_components.rainpoint.const import MODEL_POOL
 
         sensor_key = "100_200_1"
         sensor_info = make_sensor_entry(

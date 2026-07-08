@@ -86,7 +86,7 @@ class RainPointZoneDurationNumber(CoordinatorEntity, NumberEntity, RestoreEntity
         addr = sensor_info["addr"]
         sub_name = sensor_info.get("sub_name") or f"Valve Hub {addr}"
 
-        self._attr_unique_id = f"rainpoint_spenceh14_{hid}_{mid}_{addr}_zone{zone_num}_duration"
+        self._attr_unique_id = f"rainpoint_{hid}_{mid}_{addr}_zone{zone_num}_duration"
         self._attr_name = f"{sub_name} Zone {zone_num} Duration"
 
     async def async_added_to_hass(self) -> None:

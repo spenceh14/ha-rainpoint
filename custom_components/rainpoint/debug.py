@@ -30,7 +30,7 @@ class RainPointDebugSwitchEntity(SwitchEntity):
         self.coordinator = coordinator
         self.integration_entry = integration_entry
         self._attr_is_on = False
-        self._attr_unique_id = f"rainpoint_spenceh14_debug_{integration_entry.entry_id}"
+        self._attr_unique_id = f"rainpoint_debug_{integration_entry.entry_id}"
         self._attr_name = "Submit Debug Data"
         self._attr_icon = "mdi:bug"
         self._attr_entity_category = EntityCategory.DIAGNOSTIC
@@ -252,5 +252,5 @@ class RainPointDebugSwitchEntity(SwitchEntity):
             self.hass,
             message,
             title="RainPoint Debug Data",
-            notification_id=f"rainpoint_spenceh14_debug_{notification_type}",
+            notification_id=f"rainpoint_debug_{notification_type}",
         )

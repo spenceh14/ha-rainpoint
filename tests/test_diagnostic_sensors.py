@@ -5,8 +5,8 @@ from __future__ import annotations
 from datetime import datetime
 from unittest.mock import MagicMock
 
-from custom_components.rainpoint_spenceh14.const import DOMAIN
-from custom_components.rainpoint_spenceh14.diagnostic_sensors import (
+from custom_components.rainpoint.const import DOMAIN
+from custom_components.rainpoint.diagnostic_sensors import (
     RainPointBatterySensor,
     RainPointDeviceIDSensor,
     RainPointFirmwareVersionSensor,
@@ -375,25 +375,25 @@ class TestLooksLikeDeviceId:
 
     def test_int_with_nine_digits_is_valid(self):
         """A 9-digit int is a valid device id."""
-        from custom_components.rainpoint_spenceh14.diagnostic_sensors import _looks_like_device_id
+        from custom_components.rainpoint.diagnostic_sensors import _looks_like_device_id
 
         assert _looks_like_device_id(123456789) is True
 
     def test_string_with_nine_digits_is_valid(self):
         """A 9-digit numeric string is a valid device id."""
-        from custom_components.rainpoint_spenceh14.diagnostic_sensors import _looks_like_device_id
+        from custom_components.rainpoint.diagnostic_sensors import _looks_like_device_id
 
         assert _looks_like_device_id("123456789") is True
 
     def test_short_numeric_string_rejected(self):
         """A numeric string shorter than 9 digits is rejected."""
-        from custom_components.rainpoint_spenceh14.diagnostic_sensors import _looks_like_device_id
+        from custom_components.rainpoint.diagnostic_sensors import _looks_like_device_id
 
         assert _looks_like_device_id("12345") is False
 
     def test_non_int_non_str_inputs_return_false(self):
         """Inputs that are neither int nor str are rejected without raising."""
-        from custom_components.rainpoint_spenceh14.diagnostic_sensors import _looks_like_device_id
+        from custom_components.rainpoint.diagnostic_sensors import _looks_like_device_id
 
         assert _looks_like_device_id(None) is False
         assert _looks_like_device_id([1, 2, 3]) is False

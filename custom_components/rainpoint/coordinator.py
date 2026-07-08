@@ -405,7 +405,7 @@ class RainPointCoordinator(DataUpdateCoordinator):
                 f"```\n{raw_value}\n```\n\n"
                 f"You can also find this data in the sensor's attributes in Home Assistant.",
                 title="RainPoint: Unsupported Sensor Detected",
-                notification_id=f"rainpoint_spenceh14_unsupported_{model}",
+                notification_id=f"rainpoint_unsupported_{model}",
             )
 
     def _decode_one_subdevice(

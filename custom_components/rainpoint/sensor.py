@@ -409,7 +409,7 @@ class RainPointMoisturePercentSensor(RainPointSensorBase):
         super().__init__(coordinator, sensor_key, sensor_info, base_slug)
         self._simple = simple
         sub_name = sensor_info.get("sub_name") or "Sensor"
-        self._attr_unique_id = f"rainpoint_spenceh14_{base_slug}_moisture_percent"
+        self._attr_unique_id = f"rainpoint_{base_slug}_moisture_percent"
         self._attr_name = f"{sub_name} Moisture Percent"
 
     @property
@@ -436,7 +436,7 @@ class RainPointTemperatureSensor(RainPointSensorBase):
     ) -> None:
         super().__init__(coordinator, sensor_key, sensor_info, base_slug)
         sub_name = sensor_info.get("sub_name") or "Sensor"
-        self._attr_unique_id = f"rainpoint_spenceh14_{base_slug}_temperature"
+        self._attr_unique_id = f"rainpoint_{base_slug}_temperature"
         self._attr_name = f"{sub_name} Temperature"
 
     @property
@@ -464,7 +464,7 @@ class RainPointIlluminanceSensor(RainPointSensorBase):
     ) -> None:
         super().__init__(coordinator, sensor_key, sensor_info, base_slug)
         sub_name = sensor_info.get("sub_name") or "Sensor"
-        self._attr_unique_id = f"rainpoint_spenceh14_{base_slug}_illuminance"
+        self._attr_unique_id = f"rainpoint_{base_slug}_illuminance"
         self._attr_name = f"{sub_name} Illuminance"
 
     @property
@@ -496,7 +496,7 @@ class RainPointRainSensor(RainPointSensorBase):
         self._data_key = data_key
         sub_name = sensor_info.get("sub_name") or "Rain Sensor"
         slug_suffix = data_key
-        self._attr_unique_id = f"rainpoint_spenceh14_{base_slug}_{slug_suffix}"
+        self._attr_unique_id = f"rainpoint_{base_slug}_{slug_suffix}"
         # Format rain labels: convert to "Rain (Last X)" style
         window = label.replace("rain", "").strip()
         window_map = {
@@ -528,7 +528,7 @@ class DisplayHubReadingSensor(RainPointSensorBase):
     def __init__(self, coordinator, sensor_key, sensor_info, base_slug, reading_key):
         super().__init__(coordinator, sensor_key, sensor_info, base_slug)
         self._reading_key = reading_key
-        self._attr_unique_id = f"rainpoint_spenceh14_{base_slug}_displayhub_{reading_key}"
+        self._attr_unique_id = f"rainpoint_{base_slug}_displayhub_{reading_key}"
         sub_name = sensor_info.get("sub_name") or "Display Hub"
         self._attr_name = f"{sub_name} {reading_key}"
 
@@ -553,7 +553,7 @@ class RainPointTempHumCurrentSensor(RainPointSensorBase):
 
     def __init__(self, coordinator, sensor_key, sensor_info, base_slug):
         super().__init__(coordinator, sensor_key, sensor_info, base_slug)
-        self._attr_unique_id = f"rainpoint_spenceh14_{base_slug}_temphum_current"
+        self._attr_unique_id = f"rainpoint_{base_slug}_temphum_current"
         self._attr_name = f"{sensor_info.get('sub_name', 'Sensor')} Current Temperature"
 
     @property
@@ -569,7 +569,7 @@ class RainPointTempHumHighSensor(RainPointSensorBase):
 
     def __init__(self, coordinator, sensor_key, sensor_info, base_slug):
         super().__init__(coordinator, sensor_key, sensor_info, base_slug)
-        self._attr_unique_id = f"rainpoint_spenceh14_{base_slug}_temphum_high"
+        self._attr_unique_id = f"rainpoint_{base_slug}_temphum_high"
         self._attr_name = f"{sensor_info.get('sub_name', 'Sensor')} High Temperature"
 
     @property
@@ -585,7 +585,7 @@ class RainPointTempHumLowSensor(RainPointSensorBase):
 
     def __init__(self, coordinator, sensor_key, sensor_info, base_slug):
         super().__init__(coordinator, sensor_key, sensor_info, base_slug)
-        self._attr_unique_id = f"rainpoint_spenceh14_{base_slug}_temphum_low"
+        self._attr_unique_id = f"rainpoint_{base_slug}_temphum_low"
         self._attr_name = f"{sensor_info.get('sub_name', 'Sensor')} Low Temperature"
 
     @property
@@ -601,7 +601,7 @@ class RainPointTempHumHumidityCurrentSensor(RainPointSensorBase):
 
     def __init__(self, coordinator, sensor_key, sensor_info, base_slug):
         super().__init__(coordinator, sensor_key, sensor_info, base_slug)
-        self._attr_unique_id = f"rainpoint_spenceh14_{base_slug}_temphum_humidity_current"
+        self._attr_unique_id = f"rainpoint_{base_slug}_temphum_humidity_current"
         self._attr_name = f"{sensor_info.get('sub_name', 'Sensor')} Current Humidity"
 
     @property
@@ -617,7 +617,7 @@ class RainPointTempHumHumidityHighSensor(RainPointSensorBase):
 
     def __init__(self, coordinator, sensor_key, sensor_info, base_slug):
         super().__init__(coordinator, sensor_key, sensor_info, base_slug)
-        self._attr_unique_id = f"rainpoint_spenceh14_{base_slug}_temphum_humidity_high"
+        self._attr_unique_id = f"rainpoint_{base_slug}_temphum_humidity_high"
         self._attr_name = f"{sensor_info.get('sub_name', 'Sensor')} High Humidity"
 
     @property
@@ -633,7 +633,7 @@ class RainPointTempHumHumidityLowSensor(RainPointSensorBase):
 
     def __init__(self, coordinator, sensor_key, sensor_info, base_slug):
         super().__init__(coordinator, sensor_key, sensor_info, base_slug)
-        self._attr_unique_id = f"rainpoint_spenceh14_{base_slug}_temphum_humidity_low"
+        self._attr_unique_id = f"rainpoint_{base_slug}_temphum_humidity_low"
         self._attr_name = f"{sensor_info.get('sub_name', 'Sensor')} Low Humidity"
 
     @property
@@ -649,7 +649,7 @@ class RainPointFlowCurrentUsedSensor(RainPointSensorBase):
 
     def __init__(self, coordinator, sensor_key, sensor_info, base_slug):
         super().__init__(coordinator, sensor_key, sensor_info, base_slug)
-        self._attr_unique_id = f"rainpoint_spenceh14_{base_slug}_flow_current_used"
+        self._attr_unique_id = f"rainpoint_{base_slug}_flow_current_used"
         self._attr_name = f"{sensor_info.get('sub_name', 'Sensor')} Flow Current Used"
 
     @property
@@ -664,7 +664,7 @@ class RainPointFlowCurrentDurationSensor(RainPointSensorBase):
 
     def __init__(self, coordinator, sensor_key, sensor_info, base_slug):
         super().__init__(coordinator, sensor_key, sensor_info, base_slug)
-        self._attr_unique_id = f"rainpoint_spenceh14_{base_slug}_flow_current_duration"
+        self._attr_unique_id = f"rainpoint_{base_slug}_flow_current_duration"
         self._attr_name = f"{sensor_info.get('sub_name', 'Sensor')} Flow Current Duration"
 
     @property
@@ -679,7 +679,7 @@ class RainPointFlowLastUsedSensor(RainPointSensorBase):
 
     def __init__(self, coordinator, sensor_key, sensor_info, base_slug):
         super().__init__(coordinator, sensor_key, sensor_info, base_slug)
-        self._attr_unique_id = f"rainpoint_spenceh14_{base_slug}_flow_last_used"
+        self._attr_unique_id = f"rainpoint_{base_slug}_flow_last_used"
         self._attr_name = f"{sensor_info.get('sub_name', 'Sensor')} Flow Last Used"
 
     @property
@@ -694,7 +694,7 @@ class RainPointFlowLastUsedDurationSensor(RainPointSensorBase):
 
     def __init__(self, coordinator, sensor_key, sensor_info, base_slug):
         super().__init__(coordinator, sensor_key, sensor_info, base_slug)
-        self._attr_unique_id = f"rainpoint_spenceh14_{base_slug}_flow_last_used_duration"
+        self._attr_unique_id = f"rainpoint_{base_slug}_flow_last_used_duration"
         self._attr_name = f"{sensor_info.get('sub_name', 'Sensor')} Flow Last Used Duration"
 
     @property
@@ -709,7 +709,7 @@ class RainPointFlowTotalTodaySensor(RainPointSensorBase):
 
     def __init__(self, coordinator, sensor_key, sensor_info, base_slug):
         super().__init__(coordinator, sensor_key, sensor_info, base_slug)
-        self._attr_unique_id = f"rainpoint_spenceh14_{base_slug}_flow_total_today"
+        self._attr_unique_id = f"rainpoint_{base_slug}_flow_total_today"
         self._attr_name = f"{sensor_info.get('sub_name', 'Sensor')} Flow Total Today"
 
     @property
@@ -724,7 +724,7 @@ class RainPointFlowTotalSensor(RainPointSensorBase):
 
     def __init__(self, coordinator, sensor_key, sensor_info, base_slug):
         super().__init__(coordinator, sensor_key, sensor_info, base_slug)
-        self._attr_unique_id = f"rainpoint_spenceh14_{base_slug}_flow_total"
+        self._attr_unique_id = f"rainpoint_{base_slug}_flow_total"
         self._attr_name = f"{sensor_info.get('sub_name', 'Sensor')} Flow Total"
 
     @property
@@ -740,7 +740,7 @@ class RainPointFlowBatterySensor(RainPointSensorBase):
 
     def __init__(self, coordinator, sensor_key, sensor_info, base_slug):
         super().__init__(coordinator, sensor_key, sensor_info, base_slug)
-        self._attr_unique_id = f"rainpoint_spenceh14_{base_slug}_flow_battery"
+        self._attr_unique_id = f"rainpoint_{base_slug}_flow_battery"
         self._attr_name = f"{sensor_info.get('sub_name', 'Sensor')} Flow Battery"
 
     @property
@@ -757,7 +757,7 @@ class RainPointCO2Sensor(RainPointSensorBase):
 
     def __init__(self, coordinator, sensor_key, sensor_info, base_slug):
         super().__init__(coordinator, sensor_key, sensor_info, base_slug)
-        self._attr_unique_id = f"rainpoint_spenceh14_{base_slug}_co2"
+        self._attr_unique_id = f"rainpoint_{base_slug}_co2"
         self._attr_name = f"{sensor_info.get('sub_name', 'Sensor')} CO2"
 
     @property
@@ -773,7 +773,7 @@ class RainPointCO2LowSensor(RainPointSensorBase):
 
     def __init__(self, coordinator, sensor_key, sensor_info, base_slug):
         super().__init__(coordinator, sensor_key, sensor_info, base_slug)
-        self._attr_unique_id = f"rainpoint_spenceh14_{base_slug}_co2_low"
+        self._attr_unique_id = f"rainpoint_{base_slug}_co2_low"
         self._attr_name = f"{sensor_info.get('sub_name', 'Sensor')} CO2 Low"
 
     @property
@@ -789,7 +789,7 @@ class RainPointCO2HighSensor(RainPointSensorBase):
 
     def __init__(self, coordinator, sensor_key, sensor_info, base_slug):
         super().__init__(coordinator, sensor_key, sensor_info, base_slug)
-        self._attr_unique_id = f"rainpoint_spenceh14_{base_slug}_co2_high"
+        self._attr_unique_id = f"rainpoint_{base_slug}_co2_high"
         self._attr_name = f"{sensor_info.get('sub_name', 'Sensor')} CO2 High"
 
     @property
@@ -805,7 +805,7 @@ class RainPointCO2TempSensor(RainPointSensorBase):
 
     def __init__(self, coordinator, sensor_key, sensor_info, base_slug):
         super().__init__(coordinator, sensor_key, sensor_info, base_slug)
-        self._attr_unique_id = f"rainpoint_spenceh14_{base_slug}_co2_temp"
+        self._attr_unique_id = f"rainpoint_{base_slug}_co2_temp"
         self._attr_name = f"{sensor_info.get('sub_name', 'Sensor')} CO2 Temperature"
 
     @property
@@ -821,7 +821,7 @@ class RainPointCO2HumiditySensor(RainPointSensorBase):
 
     def __init__(self, coordinator, sensor_key, sensor_info, base_slug):
         super().__init__(coordinator, sensor_key, sensor_info, base_slug)
-        self._attr_unique_id = f"rainpoint_spenceh14_{base_slug}_co2_humidity"
+        self._attr_unique_id = f"rainpoint_{base_slug}_co2_humidity"
         self._attr_name = f"{sensor_info.get('sub_name', 'Sensor')} CO2 Humidity"
 
     @property
@@ -837,7 +837,7 @@ class RainPointCO2BatterySensor(RainPointSensorBase):
 
     def __init__(self, coordinator, sensor_key, sensor_info, base_slug):
         super().__init__(coordinator, sensor_key, sensor_info, base_slug)
-        self._attr_unique_id = f"rainpoint_spenceh14_{base_slug}_co2_battery"
+        self._attr_unique_id = f"rainpoint_{base_slug}_co2_battery"
         self._attr_name = f"{sensor_info.get('sub_name', 'Sensor')} CO2 Battery"
 
     @property
@@ -854,7 +854,7 @@ class RainPointPoolCurrentTempSensor(RainPointSensorBase):
 
     def __init__(self, coordinator, sensor_key, sensor_info, base_slug):
         super().__init__(coordinator, sensor_key, sensor_info, base_slug)
-        self._attr_unique_id = f"rainpoint_spenceh14_{base_slug}_pool_current_temp"
+        self._attr_unique_id = f"rainpoint_{base_slug}_pool_current_temp"
         self._attr_name = f"{sensor_info.get('sub_name', 'Sensor')} Pool Current Temperature"
 
     @property
@@ -870,7 +870,7 @@ class RainPointPoolHighTempSensor(RainPointSensorBase):
 
     def __init__(self, coordinator, sensor_key, sensor_info, base_slug):
         super().__init__(coordinator, sensor_key, sensor_info, base_slug)
-        self._attr_unique_id = f"rainpoint_spenceh14_{base_slug}_pool_high_temp"
+        self._attr_unique_id = f"rainpoint_{base_slug}_pool_high_temp"
         self._attr_name = f"{sensor_info.get('sub_name', 'Sensor')} Pool High Temperature"
 
     @property
@@ -886,7 +886,7 @@ class RainPointPoolLowTempSensor(RainPointSensorBase):
 
     def __init__(self, coordinator, sensor_key, sensor_info, base_slug):
         super().__init__(coordinator, sensor_key, sensor_info, base_slug)
-        self._attr_unique_id = f"rainpoint_spenceh14_{base_slug}_pool_low_temp"
+        self._attr_unique_id = f"rainpoint_{base_slug}_pool_low_temp"
         self._attr_name = f"{sensor_info.get('sub_name', 'Sensor')} Pool Low Temperature"
 
     @property
@@ -902,7 +902,7 @@ class RainPointPoolBatterySensor(RainPointSensorBase):
 
     def __init__(self, coordinator, sensor_key, sensor_info, base_slug):
         super().__init__(coordinator, sensor_key, sensor_info, base_slug)
-        self._attr_unique_id = f"rainpoint_spenceh14_{base_slug}_pool_battery"
+        self._attr_unique_id = f"rainpoint_{base_slug}_pool_battery"
         self._attr_name = f"{sensor_info.get('sub_name', 'Sensor')} Pool Battery"
 
     @property
@@ -919,7 +919,7 @@ class RainPointPoolPlusPoolCurrentTempSensor(RainPointSensorBase):
 
     def __init__(self, coordinator, sensor_key, sensor_info, base_slug):
         super().__init__(coordinator, sensor_key, sensor_info, base_slug)
-        self._attr_unique_id = f"rainpoint_spenceh14_{base_slug}_pool_plus_pool_current_temp"
+        self._attr_unique_id = f"rainpoint_{base_slug}_pool_plus_pool_current_temp"
         self._attr_name = f"{sensor_info.get('sub_name', 'Sensor')} Pool Temperature"
 
     @property
@@ -935,7 +935,7 @@ class RainPointPoolPlusPoolHighTempSensor(RainPointSensorBase):
 
     def __init__(self, coordinator, sensor_key, sensor_info, base_slug):
         super().__init__(coordinator, sensor_key, sensor_info, base_slug)
-        self._attr_unique_id = f"rainpoint_spenceh14_{base_slug}_pool_plus_pool_high_temp"
+        self._attr_unique_id = f"rainpoint_{base_slug}_pool_plus_pool_high_temp"
         self._attr_name = f"{sensor_info.get('sub_name', 'Sensor')} Pool High Temperature"
 
     @property
@@ -951,7 +951,7 @@ class RainPointPoolPlusPoolLowTempSensor(RainPointSensorBase):
 
     def __init__(self, coordinator, sensor_key, sensor_info, base_slug):
         super().__init__(coordinator, sensor_key, sensor_info, base_slug)
-        self._attr_unique_id = f"rainpoint_spenceh14_{base_slug}_pool_plus_pool_low_temp"
+        self._attr_unique_id = f"rainpoint_{base_slug}_pool_plus_pool_low_temp"
         self._attr_name = f"{sensor_info.get('sub_name', 'Sensor')} Pool Low Temperature"
 
     @property
@@ -967,7 +967,7 @@ class RainPointPoolPlusAmbientCurrentTempSensor(RainPointSensorBase):
 
     def __init__(self, coordinator, sensor_key, sensor_info, base_slug):
         super().__init__(coordinator, sensor_key, sensor_info, base_slug)
-        self._attr_unique_id = f"rainpoint_spenceh14_{base_slug}_pool_plus_ambient_current_temp"
+        self._attr_unique_id = f"rainpoint_{base_slug}_pool_plus_ambient_current_temp"
         self._attr_name = f"{sensor_info.get('sub_name', 'Sensor')} Ambient Temperature"
 
     @property
@@ -983,7 +983,7 @@ class RainPointPoolPlusAmbientHighTempSensor(RainPointSensorBase):
 
     def __init__(self, coordinator, sensor_key, sensor_info, base_slug):
         super().__init__(coordinator, sensor_key, sensor_info, base_slug)
-        self._attr_unique_id = f"rainpoint_spenceh14_{base_slug}_pool_plus_ambient_high_temp"
+        self._attr_unique_id = f"rainpoint_{base_slug}_pool_plus_ambient_high_temp"
         self._attr_name = f"{sensor_info.get('sub_name', 'Sensor')} Ambient High Temperature"
 
     @property
@@ -999,7 +999,7 @@ class RainPointPoolPlusAmbientLowTempSensor(RainPointSensorBase):
 
     def __init__(self, coordinator, sensor_key, sensor_info, base_slug):
         super().__init__(coordinator, sensor_key, sensor_info, base_slug)
-        self._attr_unique_id = f"rainpoint_spenceh14_{base_slug}_pool_plus_ambient_low_temp"
+        self._attr_unique_id = f"rainpoint_{base_slug}_pool_plus_ambient_low_temp"
         self._attr_name = f"{sensor_info.get('sub_name', 'Sensor')} Ambient Low Temperature"
 
     @property
@@ -1015,7 +1015,7 @@ class RainPointPoolPlusHumidityCurrentSensor(RainPointSensorBase):
 
     def __init__(self, coordinator, sensor_key, sensor_info, base_slug):
         super().__init__(coordinator, sensor_key, sensor_info, base_slug)
-        self._attr_unique_id = f"rainpoint_spenceh14_{base_slug}_pool_plus_humidity_current"
+        self._attr_unique_id = f"rainpoint_{base_slug}_pool_plus_humidity_current"
         self._attr_name = f"{sensor_info.get('sub_name', 'Sensor')} Ambient Humidity"
 
     @property
@@ -1031,7 +1031,7 @@ class RainPointPoolPlusHumidityHighSensor(RainPointSensorBase):
 
     def __init__(self, coordinator, sensor_key, sensor_info, base_slug):
         super().__init__(coordinator, sensor_key, sensor_info, base_slug)
-        self._attr_unique_id = f"rainpoint_spenceh14_{base_slug}_pool_plus_humidity_high"
+        self._attr_unique_id = f"rainpoint_{base_slug}_pool_plus_humidity_high"
         self._attr_name = f"{sensor_info.get('sub_name', 'Sensor')} Ambient High Humidity"
 
     @property
@@ -1047,7 +1047,7 @@ class RainPointPoolPlusHumidityLowSensor(RainPointSensorBase):
 
     def __init__(self, coordinator, sensor_key, sensor_info, base_slug):
         super().__init__(coordinator, sensor_key, sensor_info, base_slug)
-        self._attr_unique_id = f"rainpoint_spenceh14_{base_slug}_pool_plus_humidity_low"
+        self._attr_unique_id = f"rainpoint_{base_slug}_pool_plus_humidity_low"
         self._attr_name = f"{sensor_info.get('sub_name', 'Sensor')} Ambient Low Humidity"
 
     @property
@@ -1069,7 +1069,7 @@ class RainPointUnknownSensor(RainPointSensorBase):
     def __init__(self, coordinator, sensor_key, sensor_info, base_slug):
         super().__init__(coordinator, sensor_key, sensor_info, base_slug)
         model = sensor_info.get("model", "unknown")
-        self._attr_unique_id = f"rainpoint_spenceh14_{base_slug}_unknown_{model}"
+        self._attr_unique_id = f"rainpoint_{base_slug}_unknown_{model}"
         sub_name = sensor_info.get("sub_name") or "Sensor"
         self._attr_name = f"{sub_name} Unsupported ({model})"
 
@@ -1113,7 +1113,7 @@ class RainPointRawPayloadSensor(RainPointSensorBase):
     ) -> None:
         super().__init__(coordinator, sensor_key, sensor_info, base_slug)
         sub_name = sensor_info.get("sub_name") or "Sensor"
-        self._attr_unique_id = f"rainpoint_spenceh14_{base_slug}_raw_payload"
+        self._attr_unique_id = f"rainpoint_{base_slug}_raw_payload"
         self._attr_name = f"{sub_name} Raw Payload"
 
     @property
