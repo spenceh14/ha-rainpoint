@@ -113,7 +113,7 @@ class RainPointValveEntity(CoordinatorEntity, ValveEntity):
         decoded = info.get("data")
         if not decoded:
             return False
-        return decoded.get("hub_online") is not False
+        return decoded.get("hub_online", False)
 
     @property
     def is_closed(self) -> bool | None:
@@ -225,9 +225,7 @@ class RainPointValveEntity(CoordinatorEntity, ValveEntity):
 
     def _record_successful_command(self) -> None:
         """Tell the coordinator this zone has command-fresh state."""
-        record_command = getattr(self.coordinator, "record_valve_command", None)
-        if callable(record_command):
-            record_command(self._sensor_key, self._zone_num)
+        self.coordinator.record_valve_command(self._sensor_key, self._zone_num)
 
     # ------------------------------------------------------------------
     async def async_open_valve(self, **kwargs: Any) -> None:

@@ -73,8 +73,14 @@ def _make_coord(hids=None):
         _client=mock_client,
         _hids=hids if hids is not None else [100],
         _notified_unknown_models=set(),
+        _last_valve_command_at={},
+        data={},
         hass=mock_hass,
         logger=MagicMock(),
+    )
+    coord._preserve_recent_valve_command_state = types.MethodType(
+        _coord_module.RainPointCoordinator.__dict__["_preserve_recent_valve_command_state"],
+        coord,
     )
     return coord, mock_client
 
@@ -468,6 +474,20 @@ class TestCoordinatorUpdate:
         assert result is decoded
         assert result["zones"][1]["open"] is True
 
+    def test_status_entry_time_returns_none_for_invalid_time(self):
+        """A malformed status time cannot participate in stale-poll comparisons."""
+        assert _coord_module._status_entry_time({"time": "not-a-number"}) is None
+
+    def test_record_valve_command_stores_current_aware_time(self):
+        """record_valve_command writes the real command timestamp used by stale-poll protection."""
+        instance = object.__new__(_coord_module.RainPointCoordinator)
+        instance._last_valve_command_at = {}
+
+        recorded = _coord_module.RainPointCoordinator.record_valve_command(instance, "100_200_1", 1)
+
+        assert recorded.tzinfo is UTC
+        assert instance._last_valve_command_at[("100_200_1", 1)] is recorded
+
 
 class TestCoordinatorEdgeBranches:
     """Edge branches: non-integer addr, device_timestamp ValueError, outer generic except."""
@@ -586,6 +606,7 @@ class TestCoordinatorConstructor:
         assert instance._entry is entry
         assert instance._hids == [11, 22, 33]
         assert instance._notified_unknown_models == set()
+        assert instance._last_valve_command_at == {}
 
     def test_constructor_empty_hids_defaults_to_empty_list(self):
         """__init__ falls back to [] when CONF_HIDS missing from entry.data."""

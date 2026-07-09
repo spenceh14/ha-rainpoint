@@ -199,20 +199,6 @@ def _status_entry_time(status_entry: dict) -> datetime | None:
         return None
 
 
-def _coerce_utc_datetime(value) -> datetime | None:
-    """Normalize a datetime-like value to aware UTC."""
-    if isinstance(value, datetime):
-        if value.tzinfo is None:
-            return value.replace(tzinfo=UTC)
-        return value.astimezone(UTC)
-    if isinstance(value, str):
-        try:
-            return _coerce_utc_datetime(datetime.fromisoformat(value.replace("Z", "+00:00")))
-        except ValueError:
-            return None
-    return None
-
-
 def _build_sensor_entry(
     hub: dict,
     sub: dict,
@@ -254,9 +240,9 @@ class RainPointCoordinator(DataUpdateCoordinator):
         self._notified_unknown_models: set[str] = set()
         self._last_valve_command_at: dict[tuple[str, int], datetime] = {}
 
-    def record_valve_command(self, sensor_key: str, zone_num: int, command_time=None) -> datetime:
+    def record_valve_command(self, sensor_key: str, zone_num: int) -> datetime:
         """Remember the latest successful valve command time for stale-poll protection."""
-        command_dt = _coerce_utc_datetime(command_time) or datetime.now(UTC)
+        command_dt = datetime.now(UTC)
         self._last_valve_command_at[(sensor_key, zone_num)] = command_dt
         return command_dt
 
@@ -450,8 +436,7 @@ class RainPointCoordinator(DataUpdateCoordinator):
         _attach_device_timestamp(decoded, status_entry)
 
         sensor_key = f"{hub['hid']}_{mid}_{addr}"
-        decoded = RainPointCoordinator._preserve_recent_valve_command_state(
-            self,
+        decoded = self._preserve_recent_valve_command_state(
             sensor_key,
             model,
             decoded,
@@ -472,7 +457,7 @@ class RainPointCoordinator(DataUpdateCoordinator):
         if model not in VALVE_MODELS or not decoded or not isinstance(decoded.get("zones"), dict):
             return decoded
 
-        current_data = (getattr(self, "data", None) or {}).get("sensors", {}).get(sensor_key, {}).get("data") or {}
+        current_data = self.data.get("sensors", {}).get(sensor_key, {}).get("data") or {}
         current_zones = current_data.get("zones") or {}
         if not current_zones:
             return decoded
@@ -483,11 +468,7 @@ class RainPointCoordinator(DataUpdateCoordinator):
         changed = False
 
         for zone_num in list(zones):
-            last_command_time = (getattr(self, "_last_valve_command_at", {}) or {}).get((sensor_key, zone_num))
-            if last_command_time is None:
-                continue
-
-            last_command_time = _coerce_utc_datetime(last_command_time)
+            last_command_time = self._last_valve_command_at.get((sensor_key, zone_num))
             if last_command_time is None:
                 continue
 

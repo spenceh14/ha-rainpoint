@@ -591,6 +591,16 @@ class TestHtv213frfHexErrorBranches:
         # The raw value is still passed back for diagnostic visibility.
         assert result["hub_state_raw"] == 0x01
 
+    def test_hex_wrong_hub_state_type_with_zone_1_dp_is_online(self):
+        """DP 0x19 presence marks the hub online even when DP 0x18 has the wrong type."""
+        payload = bytes([0x18, 0xD8, 0x01, 0x19, 0xD8, 0x01]).hex()
+        result = decode_htv213frf_valve("11#" + payload)
+
+        assert result["decoder"] == "htv213frf_hex"
+        assert result["hub_online"] is True
+        assert result["hub_state_raw"] == 0x01
+        assert result["zones"][1]["open"] is True
+
     def test_hex_zone_dp_with_wrong_type_is_skipped(self):
         """DP 0x19 (zone-1 state) with type other than 0xD8 is skipped, not misread."""
         # Hub online + zone-1 DP with type 0xDC (hub-state type) instead of 0xD8.

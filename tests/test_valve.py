@@ -79,10 +79,11 @@ class TestValveProperties:
         valve = _make_valve(hub_online=False)
         assert valve.available is False
 
-    def test_available_when_hub_online_unknown(self):
-        """hub_online=None means availability is unknown, not explicitly offline."""
-        valve = _make_valve(hub_online=None)
-        assert valve.available is True
+    def test_unavailable_when_hub_online_missing(self):
+        """Decoder error dicts do not include hub_online and should be unavailable."""
+        valve = _make_valve()
+        del valve.coordinator.data["sensors"]["100_200_1"]["data"]["hub_online"]
+        assert valve.available is False
 
     def test_unavailable_when_no_data(self):
         """No data in sensors should give available == False."""

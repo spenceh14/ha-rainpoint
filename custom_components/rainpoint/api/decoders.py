@@ -196,7 +196,7 @@ def _scan_htv213_dp_map(b: bytes) -> dict[int, tuple[int, int]]:
     return dp_map
 
 
-def _extract_htv213_hub_state(dp_map: dict[int, tuple[int, int]], raw: str) -> tuple[bool | None, int | None]:
+def _extract_htv213_hub_state(dp_map: dict[int, tuple[int, int]], raw: str) -> tuple[bool, int | None]:
     """Pull (hub_online, hub_state_raw) from the dp_map.
 
     Hub online DP is 0x18 with type 0xDC enforced; value 0x01 means online.
