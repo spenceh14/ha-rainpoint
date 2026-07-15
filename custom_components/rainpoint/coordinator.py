@@ -85,17 +85,12 @@ from .const import (
     MODEL_VALVE_245,  # HTV245FRF support
     MODEL_VALVE_345,  # HTV345FRF support
     MODEL_VALVE_HUB,
+    VALVE_MODELS,
     debug_with_version,
 )
 
 _LOGGER = logging.getLogger(__name__)
 
-VALVE_MODELS = {
-    MODEL_VALVE_HUB,
-    MODEL_VALVE_213,
-    MODEL_VALVE_245,
-    MODEL_VALVE_345,
-}
 STALE_VALVE_POLL_GUARD = timedelta(minutes=5)
 
 # Decoder registry - maps device models to their decoder functions

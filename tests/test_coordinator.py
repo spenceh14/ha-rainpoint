@@ -474,6 +474,21 @@ class TestCoordinatorUpdate:
         assert result is decoded
         assert result["zones"][1]["open"] is True
 
+    def test_preserve_skips_when_no_prior_zone_data(self):
+        """First refresh has no prior zone state to preserve."""
+        coord, _ = _make_coord()
+        decoded = {"zones": {1: {"open": True, "duration_seconds": 60, "state_raw": 1}}}
+
+        result = _coord_module.RainPointCoordinator._preserve_recent_valve_command_state(
+            coord,
+            "100_200_1",
+            MODEL_VALVE_245,
+            decoded,
+            {},
+        )
+
+        assert result is decoded
+
     def test_status_entry_time_returns_none_for_invalid_time(self):
         """A malformed status time cannot participate in stale-poll comparisons."""
         assert _coord_module._status_entry_time({"time": "not-a-number"}) is None
