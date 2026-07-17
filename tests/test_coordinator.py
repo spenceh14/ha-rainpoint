@@ -489,6 +489,22 @@ class TestCoordinatorUpdate:
 
         assert result is decoded
 
+    def test_preserve_handles_none_data_on_first_poll(self):
+        """First poll runs while self.data is still None; must not raise AttributeError."""
+        coord, _ = _make_coord()
+        coord.data = None
+        decoded = {"zones": {1: {"open": True, "duration_seconds": 60, "state_raw": 1}}}
+
+        result = _coord_module.RainPointCoordinator._preserve_recent_valve_command_state(
+            coord,
+            "100_200_1",
+            MODEL_VALVE_245,
+            decoded,
+            {"time": int(datetime(2024, 1, 1, tzinfo=UTC).timestamp() * 1000)},
+        )
+
+        assert result is decoded
+
     def test_status_entry_time_returns_none_for_invalid_time(self):
         """A malformed status time cannot participate in stale-poll comparisons."""
         assert _coord_module._status_entry_time({"time": "not-a-number"}) is None

@@ -452,7 +452,7 @@ class RainPointCoordinator(DataUpdateCoordinator):
         if model not in VALVE_MODELS or not decoded or not isinstance(decoded.get("zones"), dict):
             return decoded
 
-        current_data = self.data.get("sensors", {}).get(sensor_key, {}).get("data") or {}
+        current_data = (self.data or {}).get("sensors", {}).get(sensor_key, {}).get("data") or {}
         current_zones = current_data.get("zones") or {}
         if not current_zones:
             return decoded
