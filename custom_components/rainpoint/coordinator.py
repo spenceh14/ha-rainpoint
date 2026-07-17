@@ -467,11 +467,7 @@ class RainPointCoordinator(DataUpdateCoordinator):
             if last_command_time is None:
                 continue
 
-            stale = (
-                poll_time < last_command_time
-                if poll_time is not None
-                else now - last_command_time < STALE_VALVE_POLL_GUARD
-            )
+            stale = poll_time < last_command_time if poll_time is not None else now - last_command_time < STALE_VALVE_POLL_GUARD
 
             if not stale or zone_num not in current_zones:
                 continue
